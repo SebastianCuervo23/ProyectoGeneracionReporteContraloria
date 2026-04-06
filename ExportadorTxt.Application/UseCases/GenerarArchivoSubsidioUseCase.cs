@@ -1,4 +1,4 @@
-﻿using ExportadorTxt.Application.Interfaces;
+﻿/*using ExportadorTxt.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,4 +26,4 @@ namespace ExportadorTxt.Application.UseCases
             await _archivoService.GenerarArchivoAsync(datos);
         }
     }
-}
+}*/

@@ -1,29 +1,36 @@
-﻿using ExportadorTxt.Domain.Entidades;
+﻿using ExportadorTxt.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
-using ExportadorTxt.Application.Interfaces;
+using System.Reflection;
 using System.Text;
 
+namespace ExportadorTxt.Infrastructure.Infraestructura;
 
-namespace ExportadorTxt.Infrastructure.Infraestructura
+public class ArchivoService<T> : IArchivoService<T>
 {
-    public class ArchivoService : IArchivoService
+    private readonly string? _rutaSalida;
+    private readonly string _nombreArchivo;
+
+    public ArchivoService(IConfiguration configuration)
     {
-        private readonly string? _ruta;
+        _rutaSalida = configuration["RutaSalida"];
+        _nombreArchivo = typeof(T).Name;
+    }
 
-        public ArchivoService(IConfiguration configuration)
-        {
-            _ruta = configuration["RutaSalida"];
-        }
+    public async Task GenerarArchivoAsync(IEnumerable<T> datos)
+    {
+        var nombre = $"{_nombreArchivo}_{DateTime.Now:yyyyMMddHHmm}.txt";
+        var rutaCompleta = Path.Combine(_rutaSalida!, nombre);
 
-        public async Task GenerarArchivoAsync(IEnumerable<SubsidioEspecie> datos)
-        {
-            var nombre = $"Subsidio_Especie_Microdato_{DateTime.Now:yyyyMMddhhmm}.txt";
-            var rutaCompleta = Path.Combine(_ruta, nombre);
+        var propiedades = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-            var lineas = datos.Select(d =>
-                $"{d.IdCCF}|{d.TipoIdentificacionAfiliado}|{d.NumeroIdentificacionAfiliado}|{d.Categoria}|{d.TipoIdentificacionPersonaCargo}|{d.NumeroIdentificacionPersonaCargo}|{d.TipoSubsidio}|{d.ValorSubsidio}"
-            );
-            await File.WriteAllLinesAsync(rutaCompleta, lineas, Encoding.UTF8);
-        }
+        var lineas = datos.Select(item =>
+            string.Join("|", propiedades.Select(p =>
+            {
+                var valor = p.GetValue(item);
+                return valor is DateTime dt ? dt.ToString("yyyy-MM-dd") :
+                       valor?.ToString() ?? string.Empty;
+            })));
+
+        await File.WriteAllLinesAsync(rutaCompleta, lineas, Encoding.UTF8);
     }
 }

@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
+   
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
 	<ProjectReference Include="..\ExportadorTxt.Application\ExportadorTxt.Application.csproj" />
 	<ProjectReference Include="..\ExportadorTxt.Infrastructure\ExportadorTxt.Infrastructure.csproj" />
