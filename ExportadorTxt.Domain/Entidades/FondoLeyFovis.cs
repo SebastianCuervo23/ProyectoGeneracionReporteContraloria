@@ -1,35 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExportadorTxt.Domain.Entidades
 {
     public class FondoLeyFovis
     {
-        public string PeriodoReportado { get; set; } = string.Empty;
-        public string IdCcf { get; set; } = string.Empty;
-        public string NombreCcf { get; set; } = string.Empty;
-        public string AnioAsignacion { get; set; } = string.Empty;
-        public string ComponenteVivienda { get; set; } = string.Empty;
-        public string EstadoSubsidio { get; set; } = string.Empty;
-        public string DescEstadoSubsidio { get; set; } = string.Empty;
-        public string NumIdentificaAfiliado { get; set; } = string.Empty;
-        public string NumIdentificacionIntegranteHogar { get; set; } = string.Empty;
-        public string PlanVivienda { get; set; } = string.Empty;
-        public string PrimerApellido { get; set; } = string.Empty;
-        public string PrimerNombre { get; set; } = string.Empty;
-        public string SegundoApellido { get; set; } = string.Empty;
-        public string SegundoNombre { get; set; } = string.Empty;
-        public string TitularSubsidio { get; set; } = string.Empty;
-        public string SubsidioHogar { get; set; } = string.Empty;
-        public string Parentesco { get; set; } = string.Empty;
-        public string RangoIngresoFamiliar { get; set; } = string.Empty;
-        public string EntidadFuenteFinanciamiento { get; set; } = string.Empty;
-        public string TipoDocumento { get; set; } = string.Empty;
-        public string TipoDocumentoIntegranteHogar { get; set; } = string.Empty;
-        public decimal? IngresoIntegranteHogar { get; set; }
-        public decimal? ValorSubsidio { get; set; }
+        public string Periodo_reportado { get; set; } = string.Empty;
+        public string id_ccf { get; set; } = string.Empty;
+        public string Nombre_CCF { get; set; } = string.Empty;
+        public string Anio_Asignacion { get; set; } = string.Empty;
+        public string desc_Componente_Vivienda_Microdato { get; set; } = string.Empty;
+        public string nomb_estado_subsidio_microdato { get; set; } = string.Empty;
+        public string desc_estado_subsidio_microdato { get; set; } = string.Empty;
+        public string Num_Identifica_Afiliado { get; set; } = string.Empty;
+        public string Num_Identificacion_Integrante_Hogar { get; set; } = string.Empty;
+        public string desc_plan_vivienda_microdato { get; set; } = string.Empty;
+        public string Pri_Apellido { get; set; } = string.Empty;
+        public string Pri_Nombre { get; set; } = string.Empty;
+        public string Seg_Apellido { get; set; } = string.Empty;
+        public string Seg_Nombre { get; set; } = string.Empty;
+        public string Titular_Subsidio { get; set; } = string.Empty;
+        public string desc_Subsidio_Hogar { get; set; } = string.Empty;
+        public string desc_Parentesco { get; set; } = string.Empty;
+        public string desc_Rango_Ingreso_Familiar { get; set; } = string.Empty;
+        public string desc_Entidad_Fuente_Financiamiento { get; set; } = string.Empty;
+        public string desc_Tipo_Documento { get; set; } = string.Empty;
+        public string Tipo_Documento_Integrante_Hogar { get; set; } = string.Empty;
+        public string Ingreso_Integrante_Hogar { get; set; } = string.Empty;
+        public string Val_Subsidio { get; set; } = string.Empty;
     }
 }

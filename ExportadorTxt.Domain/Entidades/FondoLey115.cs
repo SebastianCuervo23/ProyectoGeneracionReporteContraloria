@@ -1,27 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExportadorTxt.Domain.Entidades
 {
     public class FondoLey115
     {
-        public string MesReporte { get; set; } = string.Empty;
-        public int IdCcf { get; set; }
-        public string NombreCcf { get; set; } = string.Empty;
-        public string TipoDocumentoAfiliado { get; set; } = string.Empty;
-        public string NumeroIdentificacionAfiliado { get; set; } = string.Empty;
-        public string TipoDocumentoBeneficiario { get; set; } = string.Empty;
-        public string NumeroIdentificacionBeneficiario { get; set; } = string.Empty;
-        public string IdColegio { get; set; } = string.Empty;
-        public string NombreColegio { get; set; } = string.Empty;
-        public string GradoEscolaridad { get; set; } = string.Empty;
-        public string TipoSubsidio { get; set; } = string.Empty;
-        public decimal ValorSubsidio { get; set; }
-        public string CodigoInfraestructura { get; set; } = string.Empty;
-        public string NombreInfraestructura { get; set; } = string.Empty;
-        public string Categoria { get; set; } = string.Empty;
+        public string WK_MES { get; set; } = string.Empty;
+        public string id_CCF { get; set; } = string.Empty;
+        public string Nombre_CCF { get; set; } = string.Empty;
+        public string desc_Tipo_Documento { get; set; } = string.Empty;
+        public string NUM_IDENTIFICACION { get; set; } = string.Empty;
+        public string TIPO_DOCUMENTO_BENEFICIARIO { get; set; } = string.Empty;
+        public string NUMERO_IDENTIFICACION_BENEFICIARIO { get; set; } = string.Empty;
+        public string id_Colegio { get; set; } = string.Empty;
+        public string Nombre_Colegio { get; set; } = string.Empty;
+        public string desc_Grado_Escolaridad { get; set; } = string.Empty;
+        public string TIPO_SUBSIDIO { get; set; } = string.Empty;
+        public decimal VALOR_SUBSIDIO { get; set; }
+        public string Codigo_Unico_Infraestructura { get; set; } = string.Empty;
+        public string Nombre_Comercial_INFRAESTRUCTURA { get; set; } = string.Empty;
+        public string desc_Categoria { get; set; } = string.Empty;
     }
 }

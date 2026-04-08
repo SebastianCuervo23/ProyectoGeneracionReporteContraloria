@@ -21,7 +21,7 @@ public class FondoLey115Repositorio : IRepositorio<FondoLey115>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<FondoLey115>(
             "SPR_OBTENER_FONDO_LEY_115",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }

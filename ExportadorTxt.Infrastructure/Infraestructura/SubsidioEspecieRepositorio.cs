@@ -144,7 +144,7 @@ public class SubsidioEspecieRepositorio : IRepositorio<SubsidioEspecie>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<SubsidioEspecie>(
             "SPR_OBTENER_SUBSIDIO_ESPECIE_TEST",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }

@@ -1,38 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExportadorTxt.Domain.Entidades
 {
     public class FondoLeyFosfec
     {
-        public string PeriodoReportado { get; set; } = string.Empty;
-        public string IdCcf { get; set; } = string.Empty;
-        public string NombreCcf { get; set; } = string.Empty;
-        public string TipoDocumentoBeneficiario { get; set; } = string.Empty;
-        public string NumeroDocumentoBeneficiario { get; set; } = string.Empty;
-        public string PrimerNombreBeneficiario { get; set; } = string.Empty;
-        public string SegundoNombreBeneficiario { get; set; } = string.Empty;
-        public string PrimerApellidoBeneficiario { get; set; } = string.Empty;
-        public string SegundoApellidoBeneficiario { get; set; } = string.Empty;
-        public string Genero { get; set; } = string.Empty;
-        public DateTime? FechaNacimientoBeneficiario { get; set; }
-        public DateTime? FechaRadicacionSolicitud { get; set; }
-        public DateTime? FechaAprobacion { get; set; }
-        public DateTime? FechaLiquidacion { get; set; }
-        public DateTime? FechaReactivacion { get; set; }
-        public DateTime? FechaSuspension { get; set; }
-        public decimal? TotalBeneficioLiquidado { get; set; }
-        public string AreaGeografica { get; set; } = string.Empty;
-        public string DireccionResidencia { get; set; } = string.Empty;
-        public string Etnia { get; set; } = string.Empty;
-        public string Poblacion { get; set; } = string.Empty;
-        public string FactorVulnerabilidad { get; set; } = string.Empty;
-        public string CodigoCiudad { get; set; } = string.Empty;
-        public string CiudadBeneficiario { get; set; } = string.Empty;
-        public string BeneficiosEconomicos { get; set; } = string.Empty;
-        public string ComponenteMpc { get; set; } = string.Empty;
+        public string Periodo_reportado { get; set; } = string.Empty;
+        public string id_CCF { get; set; } = string.Empty;
+        public string Nombre_CCF { get; set; } = string.Empty;
+        public string desc_Tipo_Documento_Ben { get; set; } = string.Empty;
+        public string NUM_IDENTIFICA_BENEFICIARIO { get; set; } = string.Empty;
+        public string PRI_NOMBRE_BENEFICIARIO { get; set; } = string.Empty;
+        public string SEG_NOMBRE_BENEFICIARIO { get; set; } = string.Empty;
+        public string PRI_APELLIDO_BENEFICIARIO { get; set; } = string.Empty;
+        public string SEG_APELLIDO_BENEFICIARIO { get; set; } = string.Empty;
+        public string desc_Genero { get; set; } = string.Empty;
+        public string FEC_NACIMIENTO_BENEFICIARIO { get; set; } = string.Empty;
+        public string FEC_RADICA_SOLICITUD_BENEFICIARIO { get; set; } = string.Empty;
+        public string FEC_APROBACION_BENEFICIARIO { get; set; } = string.Empty;
+        public string BENEFICIOS_ECONOMICOS { get; set; } = string.Empty;
+        public string COMPONENTE_MPC { get; set; } = string.Empty;
+        public string FEC_LIQUIDACION_BENEFICIARIO { get; set; } = string.Empty;
+        public string FEC_REACTIVA_BENEFICIARIO { get; set; } = string.Empty;
+        public string FEC_SUSPENSION_BENEFICIARIO { get; set; } = string.Empty;
+        public string TOTAL_BEN_LIQ { get; set; } = string.Empty;
+        public string AREA_GEOGRAFICA { get; set; } = string.Empty;
+        public string DIR_RESIDENCIA_BENEFICIARIO { get; set; } = string.Empty;
+        public string ETNIA { get; set; } = string.Empty;
+        public string POBLACIONES { get; set; } = string.Empty;
+        public string FACTOR_VULNERABILIDAD { get; set; } = string.Empty;
+        public string COD_CIUDAD_BENEFICIARIO { get; set; } = string.Empty;
+        public string CIUDAD_BENEFICIARIO { get; set; } = string.Empty;
     }
 }

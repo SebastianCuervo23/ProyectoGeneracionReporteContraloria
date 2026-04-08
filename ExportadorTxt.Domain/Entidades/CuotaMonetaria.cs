@@ -1,35 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExportadorTxt.Domain.Entidades
+﻿public class CuotaMonetaria
 {
-    public class CuotaMonetaria
-    {
-        public string FechaReporte { get; set; } = string.Empty;
-        public int IdCcf { get; set; }
-        public string NombreCcf { get; set; } = string.Empty;
-        public string TipoDocumentoEmpresa { get; set; } = string.Empty;
-        public string NumeroDocumentoEmpresa { get; set; } = string.Empty;
-        public string TipoDocumentoAfiliado { get; set; } = string.Empty;
-        public string NumeroDocumentoAfiliado { get; set; } = string.Empty;
-        public string TipoDocumentoPersonaCargo { get; set; } = string.Empty;
-        public string NumeroDocumentoPersonaCargo { get; set; } = string.Empty;
-        public string PrimerNombrePersonaCargo { get; set; } = string.Empty;
-        public string SegundoNombrePersonaCargo { get; set; } = string.Empty;
-        public string PrimerApellidoPersonaCargo { get; set; } = string.Empty;
-        public string SegundoApellidoPersonaCargo { get; set; } = string.Empty;
-        public DateTime? FechaNacimientoPersonaCargo { get; set; }
-        public string GeneroPersonaCargo { get; set; } = string.Empty;
-        public string ParentescoPersonaCargo { get; set; } = string.Empty;
-        public string CodigoMunicipioResidencia { get; set; } = string.Empty;
-        public string AreaGeograficaResidencia { get; set; } = string.Empty;
-        public string CondicionDiscapacidad { get; set; } = string.Empty;
-        public string TipoCuota { get; set; } = string.Empty;
-        public decimal ValorCuotaMonetaria { get; set; }
-        public int NumeroCuotasPagadas { get; set; }
-        public int NumPeriodosPagados { get; set; }
-    }
+    public string Fecha_Reporte { get; set; } = string.Empty;
+    public string id_CCF { get; set; } = string.Empty;
+    public string Nombre_CCF { get; set; } = string.Empty;
+    public string Tipo_Documento_Empresa { get; set; } = string.Empty;
+    public string Num_Documento_Empresa { get; set; } = string.Empty;
+    public string Tipo_Documento_Afiliado { get; set; } = string.Empty;
+    public string Num_Documento_Afiliado { get; set; } = string.Empty;
+    public string Tipo_Documento_Persona_Cargo { get; set; } = string.Empty;
+    public string Num_Documento_Persona_Cargo { get; set; } = string.Empty;
+    public string Primer_Nombre_Persona_Cargo { get; set; } = string.Empty;
+    public string Segundo_Nombre_Persona_Cargo { get; set; } = string.Empty;
+    public string Primer_Apellido_Persona_Cargo { get; set; } = string.Empty;
+    public string Segundo_Apellido_Persona_Cargo { get; set; } = string.Empty;
+    public string Fecha_Nacimiento_Persona_a_Cargo { get; set; } = string.Empty;
+    public string Genero_Persona_a_Cargo { get; set; } = string.Empty;
+    public string Parentesco_Persona_a_Cargo { get; set; } = string.Empty;
+    public string Codigo_Municipio_Residencia { get; set; } = string.Empty;
+    public string Area_Geografica_Residencia_Persona_Cargo { get; set; } = string.Empty;
+    public string Condicion_Discapacidad { get; set; } = string.Empty;
+    public string desc_Tipo_Cuota { get; set; } = string.Empty;
+    public string Valor_Cuota_Monetaria { get; set; } = string.Empty;
+    public int Numero_Cuotas_Pagadas { get; set; }
+    public int Num_Periodos_Pagados { get; set; }
 }

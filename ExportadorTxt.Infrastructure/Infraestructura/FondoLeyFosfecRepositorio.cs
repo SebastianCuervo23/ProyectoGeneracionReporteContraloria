@@ -21,7 +21,7 @@ public class FondoLeyFosfecRepositorio : IRepositorio<FondoLeyFosfec>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<FondoLeyFosfec>(
             "SPR_OBTENER_FONDO_LEY_FOSFEC",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }

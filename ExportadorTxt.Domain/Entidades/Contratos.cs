@@ -1,44 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExportadorTxt.Domain.Entidades
 {
     public class Contratos
     {
-        public string PeriodoReportado { get; set; } = string.Empty;
-        public string IdCcf { get; set; } = string.Empty;
-        public string NombreCcf { get; set; } = string.Empty;
-        public string NumeroContratoConvenio { get; set; } = string.Empty;
-        public string IdCentroCosto { get; set; } = string.Empty;
-        public string NombreCentroCosto { get; set; } = string.Empty;
-        public DateTime? FechaFirmaContrato { get; set; }
-        public string NumeroActaConsejoDirectivo { get; set; } = string.Empty;
-        public string NombreContratante { get; set; } = string.Empty;
-        public string CargoContratante { get; set; } = string.Empty;
-        public string NombreContratista { get; set; } = string.Empty;
-        public string IdentificacionContratista { get; set; } = string.Empty;
-        public string IdNaturalezaContrato { get; set; } = string.Empty;
-        public string NaturalezaContrato { get; set; } = string.Empty;
-        public string IdClaseContrato { get; set; } = string.Empty;
-        public string ClaseContrato { get; set; } = string.Empty;
-        public string ObjetoContrato { get; set; } = string.Empty;
-        public DateTime? FechaInicioContrato { get; set; }
-        public DateTime? FechaFinContrato { get; set; }
-        public decimal? ValorInicialContrato { get; set; }
-        public decimal? ValorAdicion1Contrato { get; set; }
-        public decimal? ValorAporteCcf { get; set; }
-        public decimal? ValorAporteCooperante { get; set; }
-        public string TipoAporteCooperante { get; set; } = string.Empty;
-        public string TipoAporteSSF { get; set; } = string.Empty;
-        public string InterventorSupervisor { get; set; } = string.Empty;
-        public string CargoSupervisorInterventor { get; set; } = string.Empty;
-        public DateTime? FechaActaLiquidacion { get; set; }
-        public decimal? PorcentajeAnticipo { get; set; }
-        public decimal? AnticipoContrato { get; set; }
-        public bool? AnticipoLegalizado { get; set; }
-        public string EstadoContrato { get; set; } = string.Empty;
+        public string Periodo_reportado { get; set; } = string.Empty;
+        public string id_CCF { get; set; } = string.Empty;
+        public string Nombre_CCF { get; set; } = string.Empty;
+        public string NUMERO_CONTRATO_CONVENIO { get; set; } = string.Empty;
+        public string id_Centro_Costo { get; set; } = string.Empty;
+        public string Nombre_Centro { get; set; } = string.Empty;
+        public string FECHA_FIRMA_CONTRATO { get; set; } = string.Empty;
+        public string NUMERO_ACTA_CONSEJO_DIRECTIVO { get; set; } = string.Empty;
+        public string NOMBRE_CONTRATANTE { get; set; } = string.Empty;
+        public string CARGO_CONTRATANTE { get; set; } = string.Empty;
+        public string NOMBRE_CONTRATISTA { get; set; } = string.Empty;
+        public string IDENTIFICACION_CONTRATISTA { get; set; } = string.Empty;
+        public string id_Naturaleza_Contrato { get; set; } = string.Empty;
+        public string desc_Naturaleza_Contrato { get; set; } = string.Empty;
+        public string id_Clase_Contrato { get; set; } = string.Empty;
+        public string desc_Clase_Contrato { get; set; } = string.Empty;
+        public string OBJETO_CONTRATO { get; set; } = string.Empty;
+        public string FECHA_INICIO_CONTRATO { get; set; } = string.Empty;
+        public string FECHA_FIN_CONTRATO { get; set; } = string.Empty;
+        public string VALOR_INICIAL_CONTRATO { get; set; } = string.Empty;
+        public string VALOR_ADICION1_CONTRATO { get; set; } = string.Empty;
+        public string VALOR_APORTE_CCF { get; set; } = string.Empty;
+        public string VALOR_APORTE_COOPERANTE { get; set; } = string.Empty;
+        public string Tipo_Aporte_Cooperante { get; set; } = string.Empty;
+        public string Tipo_Aporte_SSF { get; set; } = string.Empty;
+        public string INTERVENTOR_SUPERVISOR_CONTRATO { get; set; } = string.Empty;
+        public string CARGO_SUPERVISOR_INTERVENTOR { get; set; } = string.Empty;
+        public string FECHA_ACTA_LIQUIDACION { get; set; } = string.Empty;
+        public string PORCENTAJE_ANTICIPO { get; set; } = string.Empty;
+        public string ANTICIPO_CONTRATO { get; set; } = string.Empty;
+        public string ANTICIPO_LEGALIZADO { get; set; }
+        public string Estado_Contrato { get; set; } = string.Empty;
     }
 }

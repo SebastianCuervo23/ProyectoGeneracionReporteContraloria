@@ -21,7 +21,7 @@ public class CuotaMonetariaRepositorio : IRepositorio<CuotaMonetaria>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<CuotaMonetaria>(
             "SPR_OBTENER_CUOTA_MONETARIA",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }

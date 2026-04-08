@@ -21,7 +21,7 @@ public class FondoLeyFoninez2Repositorio : IRepositorio<FondoLeyFoniñez2>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<FondoLeyFoniñez2>(
             "SPR_OBTENER_FONDO_LEY_FONINEZ2",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }

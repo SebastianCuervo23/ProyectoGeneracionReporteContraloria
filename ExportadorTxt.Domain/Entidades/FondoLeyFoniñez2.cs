@@ -19,15 +19,15 @@ namespace ExportadorTxt.Domain.Entidades
         public DateTime? FechaVinculacionBeneficiario { get; set; }
         public string CiudadResidenciaBeneficiario { get; set; } = string.Empty;
         public string AreaGeografica { get; set; } = string.Empty;
-        public string DireccionResidencia { get; set; } = string.Empty;
+        public string DireccionResidenciaBeneficiario { get; set; } = string.Empty;
         public string TipoDocumentoAcudiente { get; set; } = string.Empty;
-        public string NumeroDocumentoAcudiente { get; set; } = string.Empty;
+        public string NumeroIdentificacionAcudiente { get; set; } = string.Empty;
         public string PrimerNombreAcudiente { get; set; } = string.Empty;
         public string SegundoNombreAcudiente { get; set; } = string.Empty;
         public string PrimerApellidoAcudiente { get; set; } = string.Empty;
         public string SegundoApellidoAcudiente { get; set; } = string.Empty;
         public string TelefonoAcudiente { get; set; } = string.Empty;
-        public string ModalidadAin { get; set; } = string.Empty;
+        public string Modalidad { get; set; } = string.Empty;
         public string Infraestructura { get; set; } = string.Empty;
         public string IdInfraestructura { get; set; } = string.Empty;
         public string NombreColegio { get; set; } = string.Empty;
@@ -38,10 +38,10 @@ namespace ExportadorTxt.Domain.Entidades
         public string SegundoApellidoBeneficiario { get; set; } = string.Empty;
         public string SegundoNombreBeneficiario { get; set; } = string.Empty;
         public string ModalidadPrestacionServiciosSociales { get; set; } = string.Empty;
-        public string PaisNacimiento { get; set; } = string.Empty;
+        public string PaisNacimientoBeneficiario { get; set; } = string.Empty;
         public string CodigoPaisNacimiento { get; set; } = string.Empty;
         public string Etnia { get; set; } = string.Empty;
         public string FactorVulnerabilidad { get; set; } = string.Empty;
-        public string Poblaciones { get; set; } = string.Empty;
+        public string Poblacion { get; set; } = string.Empty;
     }
 }

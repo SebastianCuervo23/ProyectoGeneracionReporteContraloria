@@ -1,39 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExportadorTxt.Domain.Entidades
+﻿public class Afiliados
 {
-    public class Afiliados
-    {
-        public string IdCcf { get; set; } = string.Empty;
-        public string NombreCcf { get; set; } = string.Empty;
-        public string TipoDocumentoEmpresa { get; set; } = string.Empty;
-        public string NumeroDocumentoEmpresa { get; set; } = string.Empty;
-        public string TipoDocumentoAfiliado { get; set; } = string.Empty;
-        public string NumeroDocumentoAfiliado { get; set; } = string.Empty;
-        public string PrimerNombre { get; set; } = string.Empty;
-        public string SegundoNombre { get; set; } = string.Empty;
-        public string PrimerApellido { get; set; } = string.Empty;
-        public string SegundoApellido { get; set; } = string.Empty;
-        public DateTime? FechaNacimiento { get; set; }
-        public string Genero { get; set; } = string.Empty;
-        public string GradoEscolaridad { get; set; } = string.Empty;
-        public string CodigoOcupacionCiou { get; set; } = string.Empty;
-        public string OcupacionCiou { get; set; } = string.Empty;
-        public string FactorVulnerabilidad { get; set; } = string.Empty;
-        public string EstadoCivil { get; set; } = string.Empty;
-        public string PertenenciaEtnica { get; set; } = string.Empty;
-        public string PaisResidencia { get; set; } = string.Empty;
-        public string CiudadAfiliado { get; set; } = string.Empty;
-        public string AreaGeograficaResidencia { get; set; } = string.Empty;
-        public string AreaGeograficaLabor { get; set; } = string.Empty;
-        public string CodigoMunicipioLabor { get; set; } = string.Empty;
-        public decimal? SalarioBasico { get; set; }
-        public string TipoAfiliado { get; set; } = string.Empty;
-        public string Categoria { get; set; } = string.Empty;
-        public bool EsBeneficiarioSubsidioDinero { get; set; }
-    }
+    public string WK_MES { get; set; } = string.Empty;
+    public string ID_CCF { get; set; } = string.Empty;
+    public string NOMBRE_CCF { get; set; } = string.Empty;
+    public string TIPO_DOC_EMPRESA { get; set; } = string.Empty;
+    public string NUM_DOC_EMPRESA { get; set; } = string.Empty;
+    public string TIPO_DOC_AFILIADO { get; set; } = string.Empty;
+    public string NUM_DOC_AFILIADO { get; set; } = string.Empty;
+    public string PRIMER_NOMBRE { get; set; } = string.Empty;
+    public string SEGUNDO_NOMBRE { get; set; } = string.Empty;
+    public string PRIMER_APELLIDO { get; set; } = string.Empty;
+    public string SEGUNDO_APELLIDO { get; set; } = string.Empty;
+    public string FECHA_NACIMIENTO { get; set; } = string.Empty;
+    public string DESC_GENERO { get; set; } = string.Empty;
+    public string DESC_GRADO_ESCOLARIDAD { get; set; } = string.Empty;
+    public string COD_OCUPACION_CIOU { get; set; } = string.Empty;
+    public string DESC_OCUPACION_CIOU { get; set; } = string.Empty;
+    public string FACTOR_VULNERABILIDAD { get; set; } = string.Empty;
+    public string ESTADO_CIVIL { get; set; } = string.Empty;
+    public string PERTENENCIA_ETNICA { get; set; } = string.Empty;
+    public string PAIS_RESIDENCIA_BEN { get; set; } = string.Empty;
+    public string CIUDAD_AFILIADO { get; set; } = string.Empty;
+    public string AREA_GEO_RESIDENCIA { get; set; } = string.Empty;
+    public string AREA_GEO_LABOR { get; set; } = string.Empty;
+    public string COD_MUNICIPIO_LABOR { get; set; } = string.Empty;
+    public string SALARIO_BASICO { get; set; } = string.Empty;
+    public string DESC_TIPO_AFILIADO { get; set; } = string.Empty;
+    public string DESC_CATEGORIA { get; set; } = string.Empty;
+    public string B_ES_BENEFICIARIO_SUBSIDIO_DINERO { get; set; } = string.Empty;
 }

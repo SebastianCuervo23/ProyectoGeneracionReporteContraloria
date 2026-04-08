@@ -21,7 +21,7 @@ public class AfiliadosRepositorio : IRepositorio<Afiliados>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<Afiliados>(
             "SPR_OBTENER_AFILIADOS",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }

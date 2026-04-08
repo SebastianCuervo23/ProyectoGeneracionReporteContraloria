@@ -21,7 +21,7 @@ public class FondoLeyFovisRepositorio : IRepositorio<FondoLeyFovis>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<FondoLeyFovis>(
             "SPR_OBTENER_FONDO_LEY_FOVIS",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }

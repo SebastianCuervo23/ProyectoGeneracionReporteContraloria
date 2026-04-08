@@ -67,12 +67,12 @@ namespace ExportadorTxt.Worker;
 
 public class Worker : BackgroundService
 {
-    private readonly IMediator _mediator;
+    private readonly IServiceProvider _serviceProvider;
     private readonly IConfiguration _config;
 
-    public Worker(IMediator mediator, IConfiguration config)
+    public Worker(IServiceProvider serviceProvider, IConfiguration config)
     {
-        _mediator = mediator;
+        _serviceProvider = serviceProvider;
         _config = config;
     }
 
@@ -86,18 +86,21 @@ public class Worker : BackgroundService
             {
                 Console.WriteLine($"[{DateTime.Now}] Iniciando proceso...");
 
+                using var scope = _serviceProvider.CreateScope();
+                var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+
                 var anioMes = int.Parse(DateTime.Now.ToString("yyyyMM"));
 
                 await Task.WhenAll(
-                    _mediator.Send(new GenerarAfiliadosCommand(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarContratosCommand(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarCuotaMonetariaCommand(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarFondoLey115Command(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarFondoLeyFoninezeCommand(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarFondoLeyFoninez2Command(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarFondoLeyFosfecCommand(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarFondoLeyFovisCommand(anioMes), stoppingToken),
-                    _mediator.Send(new GenerarSubsidioEspecieCommand(anioMes), stoppingToken)
+                    mediator.Send(new GenerarAfiliadosCommand(anioMes), stoppingToken),
+                    mediator.Send(new GenerarContratosCommand(anioMes), stoppingToken),
+                    mediator.Send(new GenerarCuotaMonetariaCommand(anioMes), stoppingToken),
+                    mediator.Send(new GenerarFondoLey115Command(anioMes), stoppingToken),
+                    mediator.Send(new GenerarFondoLeyFoninezeCommand(anioMes), stoppingToken),
+                    mediator.Send(new GenerarFondoLeyFoninez2Command(anioMes), stoppingToken),
+                    mediator.Send(new GenerarFondoLeyFosfecCommand(anioMes), stoppingToken),
+                    mediator.Send(new GenerarFondoLeyFovisCommand(anioMes), stoppingToken),
+                    mediator.Send(new GenerarSubsidioEspecieCommand(anioMes), stoppingToken)
                 );
 
                 Console.WriteLine($"[{DateTime.Now}] Todos los archivos generados correctamente.");

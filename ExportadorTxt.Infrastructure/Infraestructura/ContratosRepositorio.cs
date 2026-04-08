@@ -21,7 +21,7 @@ public class ContratosRepositorio : IRepositorio<Contratos>
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<Contratos>(
             "SPR_OBTENER_CONTRATOS",
-            new { ANIO_MES = anioMes },
+            new { ANIOMES = anioMes },
             commandType: CommandType.StoredProcedure);
     }
 }
