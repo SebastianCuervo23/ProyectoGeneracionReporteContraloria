@@ -32,7 +32,7 @@ public class CuotaMonetariaHandler : IRequestHandler<GenerarCuotaMonetariaComman
 
             Console.WriteLine($"[{typeof(CuotaMonetaria).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
 
-            if (lote.Count() < PageSize) break; // última página
+            if (lote.Count() < PageSize) break; 
 
             pageNumber++;
         }

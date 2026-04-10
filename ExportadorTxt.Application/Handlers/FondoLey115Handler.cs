@@ -32,7 +32,7 @@ public class FondoLey115Handler : IRequestHandler<GenerarFondoLey115Command>
 
             Console.WriteLine($"[{typeof(FondoLey115).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
 
-            if (lote.Count() < PageSize) break; // última página
+            if (lote.Count() < PageSize) break; 
 
             pageNumber++;
         }

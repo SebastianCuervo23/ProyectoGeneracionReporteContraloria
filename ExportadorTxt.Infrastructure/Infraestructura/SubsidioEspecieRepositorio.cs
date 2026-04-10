@@ -24,6 +24,6 @@ public class SubsidioEspecieRepositorio : IRepositorio<SubsidioEspecie>
             "SPR_OBTENER_SUBSIDIO_ESPECIE",
             new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
             commandType: CommandType.StoredProcedure,
-            commandTimeout: 300); // 2 minutos por página
+            commandTimeout: 300);
     }
 }

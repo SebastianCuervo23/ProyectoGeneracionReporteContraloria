@@ -33,7 +33,7 @@ public class FondoLeyFovisHandler : IRequestHandler<GenerarFondoLeyFovisCommand>
 
             Console.WriteLine($"[{typeof(FondoLeyFovis).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
 
-            if (lote.Count() < PageSize) break; // última página
+            if (lote.Count() < PageSize) break; 
 
             pageNumber++;
         }

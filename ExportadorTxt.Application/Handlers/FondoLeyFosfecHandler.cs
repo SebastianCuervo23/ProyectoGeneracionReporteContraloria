@@ -32,7 +32,7 @@ public class FondoLeyFosfecHandler : IRequestHandler<GenerarFondoLeyFosfecComman
 
             Console.WriteLine($"[{typeof(FondoLeyFosfec).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
 
-            if (lote.Count() < PageSize) break; // última página
+            if (lote.Count() < PageSize) break; 
 
             pageNumber++;
         }

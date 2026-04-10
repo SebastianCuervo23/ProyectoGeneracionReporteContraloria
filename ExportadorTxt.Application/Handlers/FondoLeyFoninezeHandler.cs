@@ -32,7 +32,7 @@ public class FondoLeyFoninezeHandler : IRequestHandler<GenerarFondoLeyFoninezeCo
 
             Console.WriteLine($"[{typeof(FondoLeyFoniñez).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
 
-            if (lote.Count() < PageSize) break; // última página
+            if (lote.Count() < PageSize) break; 
 
             pageNumber++;
         }
