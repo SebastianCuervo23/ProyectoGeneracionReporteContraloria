@@ -16,12 +16,13 @@ public class FondoLeyFosfecRepositorio : IRepositorio<FondoLeyFosfec>
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<IEnumerable<FondoLeyFosfec>> ObtenerDatosAsync(int anioMes)
+    public async Task<IEnumerable<FondoLeyFosfec>> ObtenerDatosAsync(int anioMes,int pageNumber,int pageSize )
     {
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<FondoLeyFosfec>(
             "SPR_OBTENER_FONDO_LEY_FOSFEC",
-            new { ANIOMES = anioMes },
-            commandType: CommandType.StoredProcedure);
+            new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
+            commandType: CommandType.StoredProcedure,
+            commandTimeout: 300);
     }
 }

@@ -16,12 +16,13 @@ public class CuotaMonetariaRepositorio : IRepositorio<CuotaMonetaria>
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<IEnumerable<CuotaMonetaria>> ObtenerDatosAsync(int anioMes)
+    public async Task<IEnumerable<CuotaMonetaria>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
     {
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<CuotaMonetaria>(
             "SPR_OBTENER_CUOTA_MONETARIA",
-            new { ANIOMES = anioMes },
-            commandType: CommandType.StoredProcedure);
+            new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
+            commandType: CommandType.StoredProcedure,
+            commandTimeout: 300);
     }
 }

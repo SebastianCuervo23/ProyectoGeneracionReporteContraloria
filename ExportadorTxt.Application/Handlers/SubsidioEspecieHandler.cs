@@ -9,8 +9,11 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
 {
     private readonly IRepositorio<SubsidioEspecie> _repositorio;
     private readonly IArchivoService<SubsidioEspecie> _archivoService;
+    private const int PageSize = 100000;
 
-    public SubsidioEspecieHandler(IRepositorio<SubsidioEspecie> repositorio, IArchivoService<SubsidioEspecie> archivoService)
+    public SubsidioEspecieHandler(
+        IRepositorio<SubsidioEspecie> repositorio,
+        IArchivoService<SubsidioEspecie> archivoService)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;
@@ -18,8 +21,23 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
 
     public async Task Handle(GenerarSubsidioEspecieCommand request, CancellationToken cancellationToken)
     {
-        var datos = await _repositorio.ObtenerDatosAsync(request.AnioMes);
-        if (!datos.Any()) return;
-        await _archivoService.GenerarArchivoAsync(datos);
+        await _archivoService.InicializarArchivoAsync();
+
+        int pageNumber = 1;
+
+        while (true)
+        {
+            var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
+
+            if (!lote.Any()) break;
+
+            await _archivoService.AgregarLoteAsync(lote);
+
+            Console.WriteLine($"[{typeof(SubsidioEspecie).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
+
+            if (lote.Count() < PageSize) break; // última página
+
+            pageNumber++;
+        }
     }
 }

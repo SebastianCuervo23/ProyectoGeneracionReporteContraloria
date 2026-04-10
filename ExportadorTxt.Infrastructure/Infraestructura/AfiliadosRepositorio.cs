@@ -16,12 +16,13 @@ public class AfiliadosRepositorio : IRepositorio<Afiliados>
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<IEnumerable<Afiliados>> ObtenerDatosAsync(int anioMes)
+    public async Task<IEnumerable<Afiliados>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
     {
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<Afiliados>(
             "SPR_OBTENER_AFILIADOS",
-            new { ANIOMES = anioMes },
-            commandType: CommandType.StoredProcedure);
+            new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
+            commandType: CommandType.StoredProcedure,
+            commandTimeout: 300);
     }
 }

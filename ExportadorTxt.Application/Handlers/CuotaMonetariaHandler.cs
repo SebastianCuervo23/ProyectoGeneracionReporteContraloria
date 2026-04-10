@@ -9,6 +9,7 @@ public class CuotaMonetariaHandler : IRequestHandler<GenerarCuotaMonetariaComman
 {
     private readonly IRepositorio<CuotaMonetaria> _repositorio;
     private readonly IArchivoService<CuotaMonetaria> _archivoService;
+    private const int PageSize = 100000;
 
     public CuotaMonetariaHandler(IRepositorio<CuotaMonetaria> repositorio, IArchivoService<CuotaMonetaria> archivoService)
     {
@@ -18,8 +19,22 @@ public class CuotaMonetariaHandler : IRequestHandler<GenerarCuotaMonetariaComman
 
     public async Task Handle(GenerarCuotaMonetariaCommand request, CancellationToken cancellationToken)
     {
-        var datos = await _repositorio.ObtenerDatosAsync(request.AnioMes);
-        if (!datos.Any()) return;
-        await _archivoService.GenerarArchivoAsync(datos);
+        await _archivoService.InicializarArchivoAsync();
+
+        int pageNumber = 1;
+
+        while (true)
+        {
+            var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
+            if (!lote.Any()) break;
+
+            await _archivoService.AgregarLoteAsync(lote);
+
+            Console.WriteLine($"[{typeof(CuotaMonetaria).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
+
+            if (lote.Count() < PageSize) break; // última página
+
+            pageNumber++;
+        }
     }
 }

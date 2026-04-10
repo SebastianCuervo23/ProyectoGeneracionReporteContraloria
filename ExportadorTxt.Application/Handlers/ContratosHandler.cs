@@ -9,6 +9,7 @@ public class ContratosHandler : IRequestHandler<GenerarContratosCommand>
 {
     private readonly IRepositorio<Contratos> _repositorio;
     private readonly IArchivoService<Contratos> _archivoService;
+    private const int PageSize = 100000;
 
     public ContratosHandler(IRepositorio<Contratos> repositorio, IArchivoService<Contratos> archivoService)
     {
@@ -18,8 +19,22 @@ public class ContratosHandler : IRequestHandler<GenerarContratosCommand>
 
     public async Task Handle(GenerarContratosCommand request, CancellationToken cancellationToken)
     {
-        var datos = await _repositorio.ObtenerDatosAsync(request.AnioMes);
-        if (!datos.Any()) return;
-        await _archivoService.GenerarArchivoAsync(datos);
+        await _archivoService.InicializarArchivoAsync();
+
+        int pageNumber = 1;
+
+        while (true)
+        {
+            var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
+            if (!lote.Any()) break;
+
+            await _archivoService.AgregarLoteAsync(lote);
+
+            Console.WriteLine($"[{typeof(Contratos).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
+
+            if (lote.Count() < PageSize) break; // última página
+
+            pageNumber++;
+        }
     }
 }

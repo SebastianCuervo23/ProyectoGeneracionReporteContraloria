@@ -9,6 +9,7 @@ public class FondoLeyFosfecHandler : IRequestHandler<GenerarFondoLeyFosfecComman
 {
     private readonly IRepositorio<FondoLeyFosfec> _repositorio;
     private readonly IArchivoService<FondoLeyFosfec> _archivoService;
+    private const int PageSize = 100000;
 
     public FondoLeyFosfecHandler(IRepositorio<FondoLeyFosfec> repositorio, IArchivoService<FondoLeyFosfec> archivoService)
     {
@@ -18,8 +19,22 @@ public class FondoLeyFosfecHandler : IRequestHandler<GenerarFondoLeyFosfecComman
 
     public async Task Handle(GenerarFondoLeyFosfecCommand request, CancellationToken cancellationToken)
     {
-        var datos = await _repositorio.ObtenerDatosAsync(request.AnioMes);
-        if (!datos.Any()) return;
-        await _archivoService.GenerarArchivoAsync(datos);
+        await _archivoService.InicializarArchivoAsync();
+
+        int pageNumber = 1;
+
+        while (true)
+        {
+            var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
+            if (!lote.Any()) break;
+
+            await _archivoService.AgregarLoteAsync(lote);
+
+            Console.WriteLine($"[{typeof(FondoLeyFosfec).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
+
+            if (lote.Count() < PageSize) break; // última página
+
+            pageNumber++;
+        }
     }
 }

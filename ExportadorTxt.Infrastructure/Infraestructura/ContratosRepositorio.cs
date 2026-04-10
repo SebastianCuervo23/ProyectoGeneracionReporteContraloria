@@ -16,12 +16,13 @@ public class ContratosRepositorio : IRepositorio<Contratos>
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<IEnumerable<Contratos>> ObtenerDatosAsync(int anioMes)
+    public async Task<IEnumerable<Contratos>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
     {
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<Contratos>(
             "SPR_OBTENER_CONTRATOS",
-            new { ANIOMES = anioMes },
-            commandType: CommandType.StoredProcedure);
+            new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
+            commandType: CommandType.StoredProcedure,
+            commandTimeout: 300);
     }
 }

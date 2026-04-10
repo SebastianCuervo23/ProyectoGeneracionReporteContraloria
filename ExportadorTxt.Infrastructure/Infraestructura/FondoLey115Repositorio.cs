@@ -16,12 +16,13 @@ public class FondoLey115Repositorio : IRepositorio<FondoLey115>
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<IEnumerable<FondoLey115>> ObtenerDatosAsync(int anioMes)
+    public async Task<IEnumerable<FondoLey115>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
     {
         using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<FondoLey115>(
             "SPR_OBTENER_FONDO_LEY_115",
-            new { ANIOMES = anioMes },
-            commandType: CommandType.StoredProcedure);
+            new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
+            commandType: CommandType.StoredProcedure,
+            commandTimeout: 300);
     }
 }
