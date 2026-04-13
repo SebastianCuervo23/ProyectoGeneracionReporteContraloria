@@ -10,7 +10,7 @@ namespace ExportadorTxt.Application.Handlers
     {
         private readonly IRepositorio<Afiliados> _repositorio;
         private readonly IArchivoService<Afiliados> _archivoService;
-        private const int PageSize = 100000;
+        private const int PageSize = 50000;
         private readonly IAuditService _auditService;
 
         public AfiliadosHandler(

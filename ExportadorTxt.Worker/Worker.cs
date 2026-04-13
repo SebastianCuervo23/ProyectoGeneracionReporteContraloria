@@ -29,17 +29,15 @@ public class Worker : BackgroundService
 
                 var anioMes = int.Parse(DateTime.Now.ToString("yyyyMM"));
 
-                await Task.WhenAll(
-                    mediator.Send(new GenerarAfiliadosCommand(anioMes), stoppingToken),
-                    mediator.Send(new GenerarContratosCommand(anioMes), stoppingToken),
-                    mediator.Send(new GenerarCuotaMonetariaCommand(anioMes), stoppingToken),
-                    mediator.Send(new GenerarFondoLey115Command(anioMes), stoppingToken),
-                    mediator.Send(new GenerarFondoLeyFoninezeCommand(anioMes), stoppingToken),
-                    mediator.Send(new GenerarFondoLeyFoninez2Command(anioMes), stoppingToken),
-                    mediator.Send(new GenerarFondoLeyFosfecCommand(anioMes), stoppingToken),
-                    mediator.Send(new GenerarFondoLeyFovisCommand(anioMes), stoppingToken),
-                    mediator.Send(new GenerarSubsidioEspecieCommand(anioMes), stoppingToken)
-                );
+                await mediator.Send(new GenerarAfiliadosCommand(anioMes), stoppingToken);
+                await mediator.Send(new GenerarContratosCommand(anioMes), stoppingToken);
+                await mediator.Send(new GenerarCuotaMonetariaCommand(anioMes), stoppingToken);
+                await mediator.Send(new GenerarFondoLey115Command(anioMes), stoppingToken);
+                await mediator.Send(new GenerarFondoLeyFoninezeCommand(anioMes), stoppingToken);
+                await mediator.Send(new GenerarFondoLeyFoninez2Command(anioMes), stoppingToken);
+                await mediator.Send(new GenerarFondoLeyFosfecCommand(anioMes), stoppingToken);
+                await mediator.Send(new GenerarFondoLeyFovisCommand(anioMes), stoppingToken);
+                await mediator.Send(new GenerarSubsidioEspecieCommand(anioMes), stoppingToken);
 
                 Console.WriteLine($"[{DateTime.Now}] Todos los archivos generados correctamente.");
             }

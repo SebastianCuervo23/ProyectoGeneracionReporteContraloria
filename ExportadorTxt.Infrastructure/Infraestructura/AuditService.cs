@@ -29,8 +29,7 @@ public class AuditService : IAuditService
         parametros.Add("@TamanoArchivoBytes", registro.TamanoArchivoBytes);
         parametros.Add("@FechaInicio", registro.FechaInicio);
         parametros.Add("@FechaFin", registro.FechaFin);
-        parametros.Add("@IdGenerado", dbType: DbType.Int64,
-                                               direction: ParameterDirection.Output);
+        parametros.Add("@IdGenerado", dbType: DbType.Int64,direction: ParameterDirection.Output);
 
         await connection.ExecuteAsync(
             "SPR_REGISTRAR_AUDITORIA",
@@ -39,7 +38,6 @@ public class AuditService : IAuditService
             commandTimeout: 60);
 
         var idGenerado = parametros.Get<long>("@IdGenerado");
-        Console.WriteLine($"[AUDIT] Registro de auditoría guardado. Id={idGenerado} | {registro.TipoReporte} | Registros={registro.TotalRegistros}");
     }
 
     public async Task RegistrarErrorAsync(ErrorRecord error)

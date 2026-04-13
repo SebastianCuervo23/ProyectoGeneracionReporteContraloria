@@ -21,7 +21,7 @@ public class FondoLeyFoninezeHandler : IRequestHandler<GenerarFondoLeyFoninezeCo
 
     public async Task Handle(GenerarFondoLeyFoninezeCommand request, CancellationToken cancellationToken)
     {
-        var tipoReporte = typeof(Afiliados).Name;
+        var tipoReporte = typeof(FondoLeyFoniñez).Name;
         var fechaInicio = DateTime.Now;
         long totalRegistros = 0;
         int totalPaginas = 0;

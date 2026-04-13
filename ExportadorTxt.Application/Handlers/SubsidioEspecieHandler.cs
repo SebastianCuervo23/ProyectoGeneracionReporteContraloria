@@ -21,10 +21,11 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
 
     public async Task Handle(GenerarSubsidioEspecieCommand request, CancellationToken cancellationToken)
     {
-        var tipoReporte = typeof(Afiliados).Name;
+        var tipoReporte = typeof(SubsidioEspecie).Name; 
         var fechaInicio = DateTime.Now;
         long totalRegistros = 0;
         int totalPaginas = 0;
+
         try
         {
             await _archivoService.InicializarArchivoAsync();
@@ -38,19 +39,24 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
                 if (!lote.Any()) break;
 
                 await _archivoService.AgregarLoteAsync(lote);
+
                 var countLote = lote.Count();
                 totalRegistros += countLote;
                 totalPaginas = pageNumber;
+
                 Console.WriteLine($"[{typeof(SubsidioEspecie).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
 
-                if (lote.Count() < PageSize) break;
+                if (countLote < PageSize)
+                    break;
 
                 pageNumber++;
             }
-            var rutaCompleta = _archivoService.ObtenerRutaCompleta();  // ver nota (1)
+
+            var rutaCompleta = _archivoService.ObtenerRutaCompleta();
+
             var tamano = File.Exists(rutaCompleta)
-                               ? new FileInfo(rutaCompleta).Length
-                               : 0L;
+                ? new FileInfo(rutaCompleta).Length
+                : 0L;
 
             await _auditService.RegistrarArchivoAsync(new AuditRecord(
                 NombreArchivo: Path.GetFileName(rutaCompleta),
@@ -67,14 +73,14 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
         catch (Exception ex)
         {
             await _auditService.RegistrarErrorAsync(new ErrorRecord(
-                    TipoReporte: tipoReporte,
-                    AnioMes: request.AnioMes,
-                    NombreArchivo: null,
-                    MensajeError: ex.Message,
-                    StackTrace: ex.StackTrace,
-                    TipoExcepcion: ex.GetType().FullName,
-                    PaginaFallo: null
-                ));
+                TipoReporte: tipoReporte,
+                AnioMes: request.AnioMes,
+                NombreArchivo: null,
+                MensajeError: ex.Message,
+                StackTrace: ex.StackTrace,
+                TipoExcepcion: ex.GetType().FullName,
+                PaginaFallo: null
+            ));
 
             Console.WriteLine($"[{tipoReporte}] ERROR: {ex.Message}");
             throw;

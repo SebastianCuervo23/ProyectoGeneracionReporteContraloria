@@ -21,7 +21,7 @@ public class CuotaMonetariaHandler : IRequestHandler<GenerarCuotaMonetariaComman
 
     public async Task Handle(GenerarCuotaMonetariaCommand request, CancellationToken cancellationToken)
     {
-        var tipoReporte = typeof(Contratos).Name;
+        var tipoReporte = typeof(CuotaMonetaria).Name;
         var fechaInicio = DateTime.Now;
         long totalRegistros = 0;
         int totalPaginas = 0;

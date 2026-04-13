@@ -21,7 +21,7 @@ public class FondoLeyFosfecHandler : IRequestHandler<GenerarFondoLeyFosfecComman
 
     public async Task Handle(GenerarFondoLeyFosfecCommand request, CancellationToken cancellationToken)
     {
-        var tipoReporte = typeof(Afiliados).Name;
+        var tipoReporte = typeof(FondoLeyFosfec).Name;
         var fechaInicio = DateTime.Now;
         long totalRegistros = 0;
         int totalPaginas = 0;

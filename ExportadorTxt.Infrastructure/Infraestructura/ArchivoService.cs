@@ -12,15 +12,22 @@ public class ArchivoService<T> : IArchivoService<T>
     private string? _rutaCompleta;
     private readonly PropertyInfo[] _propiedades;
 
+
     public ArchivoService(IConfiguration configuration)
     {
         _rutaSalida = configuration["RutaSalida"];
         _nombreArchivo = typeof(T).Name;
         _propiedades = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+    }
+    public string? ObtenerRutaCompleta()
+    {
+        return _rutaCompleta;
     }
 
     public Task InicializarArchivoAsync()
     {
+        
         var nombre = $"{_nombreArchivo}_{DateTime.Now:yyyyMMddHHmm}.txt";
         _rutaCompleta = Path.Combine(_rutaSalida!, nombre);
 
