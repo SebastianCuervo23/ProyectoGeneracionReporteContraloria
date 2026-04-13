@@ -32,6 +32,9 @@ builder.Services.AddScoped<IArchivoService<FondoLeyFosfec>, ArchivoService<Fondo
 builder.Services.AddScoped<IArchivoService<FondoLeyFovis>, ArchivoService<FondoLeyFovis>>();
 builder.Services.AddScoped<IArchivoService<SubsidioEspecie>, ArchivoService<SubsidioEspecie>>();
 
+//Servicio de auditoría
+builder.Services.AddSingleton<IAuditService, AuditService>();
+
 // Worker
 builder.Services.AddHostedService<Worker>();
 
