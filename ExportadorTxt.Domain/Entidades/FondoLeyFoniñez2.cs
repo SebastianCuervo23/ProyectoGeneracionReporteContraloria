@@ -8,40 +8,40 @@ namespace ExportadorTxt.Domain.Entidades
 {
     public class FondoLeyFoniñez2
     {
-        public string PeriodoReportado { get; set; } = string.Empty;
-        public string IdCcf { get; set; } = string.Empty;
-        public string NombreCcf { get; set; } = string.Empty;
-        public string TipoBeneficiario { get; set; } = string.Empty;
-        public string TipoDocumentoBeneficiario { get; set; } = string.Empty;
-        public string Genero { get; set; } = string.Empty;
-        public DateTime? FechaNacimientoBeneficiario { get; set; }
-        public string CiudadNacimientoBeneficiario { get; set; } = string.Empty;
-        public DateTime? FechaVinculacionBeneficiario { get; set; }
-        public string CiudadResidenciaBeneficiario { get; set; } = string.Empty;
-        public string AreaGeografica { get; set; } = string.Empty;
-        public string DireccionResidenciaBeneficiario { get; set; } = string.Empty;
-        public string TipoDocumentoAcudiente { get; set; } = string.Empty;
-        public string NumeroIdentificacionAcudiente { get; set; } = string.Empty;
-        public string PrimerNombreAcudiente { get; set; } = string.Empty;
-        public string SegundoNombreAcudiente { get; set; } = string.Empty;
-        public string PrimerApellidoAcudiente { get; set; } = string.Empty;
-        public string SegundoApellidoAcudiente { get; set; } = string.Empty;
-        public string TelefonoAcudiente { get; set; } = string.Empty;
-        public string Modalidad { get; set; } = string.Empty;
-        public string Infraestructura { get; set; } = string.Empty;
-        public string IdInfraestructura { get; set; } = string.Empty;
-        public string NombreColegio { get; set; } = string.Empty;
-        public string NombreCompletoEstudiante { get; set; } = string.Empty;
-        public string NumeroDocumentoEstudiante { get; set; } = string.Empty;
-        public string PrimerApellidoBeneficiario { get; set; } = string.Empty;
-        public string PrimerNombreBeneficiario { get; set; } = string.Empty;
-        public string SegundoApellidoBeneficiario { get; set; } = string.Empty;
-        public string SegundoNombreBeneficiario { get; set; } = string.Empty;
-        public string ModalidadPrestacionServiciosSociales { get; set; } = string.Empty;
-        public string PaisNacimientoBeneficiario { get; set; } = string.Empty;
-        public string CodigoPaisNacimiento { get; set; } = string.Empty;
-        public string Etnia { get; set; } = string.Empty;
-        public string FactorVulnerabilidad { get; set; } = string.Empty;
-        public string Poblacion { get; set; } = string.Empty;
+        public string Periodo_reportado { get; set; } = string.Empty;
+        public string id_CCF { get; set; } = string.Empty;
+        public string Nombre_CCF { get; set; } = string.Empty;
+        public string desc_Tipo_Beneficiario_C020 { get; set; } = string.Empty;
+        public string desc_Tipo_Documento_beneficiario { get; set; } = string.Empty;
+        public string desc_Genero { get; set; } = string.Empty;
+        public DateTime? FEC_NACIMIENTO_BENEFICIARIO { get; set; }
+        public string Ciudad_Nacimiento_Beneficiario { get; set; } = string.Empty;
+        public DateTime? FEC_VINCULACION_BENEFICIARIO { get; set; }
+        public string Ciudad_Residencia_Beneficiario { get; set; } = string.Empty;
+        public string area_geografica { get; set; } = string.Empty;
+        public string DIR_RESIDENCIA_BENEFICIARIO { get; set; } = string.Empty;
+        public string Tipo_Documento_Madre_Padre_Beneficiario { get; set; } = string.Empty;
+        public string NUM_IDENTIFICACION_MADRE_PADRE_ACUDIENTE { get; set; } = string.Empty;
+        public string PRI_NOMBRE_MADRE_PADRE_ACUDIENTE { get; set; } = string.Empty;
+        public string SEG_NOMBRE_MADRE_PADRE_ACUDIENTE { get; set; } = string.Empty;
+        public string PRI_APELLIDO_MADRE_PADRE_ACUDIENTE { get; set; } = string.Empty;
+        public string SEG_APELLIDO_MADRE_PADRE_ACUDIENTE { get; set; } = string.Empty;
+        public string TEL_MADRE_PADRE_ACUDIENTE { get; set; } = string.Empty;
+        public string desc_Modalidad_AIN { get; set; } = string.Empty;
+        public string Desc_Infraestructura { get; set; } = string.Empty;
+        public string ID_Infraestructura { get; set; } = string.Empty;
+        public string Nombre_Colegio { get; set; } = string.Empty;
+        public string Nombre_Completo_estud { get; set; } = string.Empty;
+        public string Numero_Documento_estud { get; set; } = string.Empty;
+        public string PRI_APELLIDO_BENEFICIARIO { get; set; } = string.Empty;
+        public string PRI_NOMBRE_BENEFICIARIO { get; set; } = string.Empty;
+        public string SEG_APELLIDO_BENEFICIARIO { get; set; } = string.Empty;
+        public string SEG_NOMBRE_BENEFICIARIO { get; set; } = string.Empty;
+        public string modalidad_prestacion_servicios_sociales { get; set; } = string.Empty;
+        public string PAI_NOMBRE_PAIS { get; set; } = string.Empty;
+        public string PAI_COD_PAIS { get; set; } = string.Empty;
+        public string PET_CDESCRIPCION { get; set; } = string.Empty;
+        public string FVU_CDESCRIPCION { get; set; } = string.Empty;
+        public string POB_CDESCRIPCION { get; set; } = string.Empty;
     }
 }

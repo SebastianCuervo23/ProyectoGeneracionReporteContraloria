@@ -4,31 +4,31 @@ namespace ExportadorTxt.Domain.Entidades
 {
     public class FondoLeyFoniñez
     {
-        public string WkMes { get; set; } = string.Empty;
-        public string IdCcf { get; set; } = string.Empty;
-        public string NombreCcf { get; set; } = string.Empty;
-        public string NombreCompleto { get; set; } = string.Empty;
-        public string NumeroDocumento { get; set; } = string.Empty;
-        public string TipoDocumento { get; set; } = string.Empty;
-        public string IdConvenioJec { get; set; } = string.Empty;
-        public string TipoJornada { get; set; } = string.Empty;
-        public string ModalidadJec { get; set; } = string.Empty;
-        public string Infraestructura { get; set; } = string.Empty;
-        public string IdInfraestructura { get; set; } = string.Empty;
-        public string CiudadInfraestructura { get; set; } = string.Empty;
-        public string NombreColegio { get; set; } = string.Empty;
-        public string IdColegio { get; set; } = string.Empty;
-        public string ModalidadPrestacionServiciosSociales { get; set; } = string.Empty;
+        public string wk_Mes { get; set; } = string.Empty;
+        public string id_CCF { get; set; } = string.Empty;
+        public string Nombre_CCF { get; set; } = string.Empty;
+        public string Nombre_Completo { get; set; } = string.Empty;
+        public string Numero_Documento { get; set; } = string.Empty;
+        public string desc_Tipo_Documento { get; set; } = string.Empty;
+        public string ID_CONVENIO_JEC { get; set; } = string.Empty;
+        public string tipo_jornada { get; set; } = string.Empty;
+        public string desc_Modalidad_JECO { get; set; } = string.Empty;
+        public string Desc_Infraestructura { get; set; } = string.Empty;
+        public string ID_Infraestructura { get; set; } = string.Empty;
+        public string Nombre_Ciudad_infraestructura { get; set; } = string.Empty;
+        public string Nombre_Colegio { get; set; } = string.Empty;
+        public string id_Colegio { get; set; } = string.Empty;
+        public string Modalidad_prestacion_serv_soc { get; set; } = string.Empty;
         public string Etnia { get; set; } = string.Empty;
-        public string Poblacion { get; set; } = string.Empty;
-        public string TipoBeneficiario { get; set; } = string.Empty;
-        public string Genero { get; set; } = string.Empty;
-        public DateTime? FechaNacimientoBeneficiario { get; set; }
-        public string DireccionResidenciaBeneficiario { get; set; } = string.Empty;
-        public string CiudadNacimientoBeneficiario { get; set; } = string.Empty;
-        public string CiudadResidenciaBeneficiario { get; set; } = string.Empty;
-        public string AreaGeografica { get; set; } = string.Empty;
-        public string PaisNacimientoBeneficiario { get; set; } = string.Empty;
-        public string Sector { get; set; } = string.Empty;
+        public string poblaciones { get; set; } = string.Empty;
+        public string desc_Tipo_Beneficiario_C020 { get; set; } = string.Empty;
+        public string desc_Genero { get; set; } = string.Empty;
+        public string FEC_NACIMIENTO_BENEFICIARIO { get; set; }
+        public string DIR_RESIDENCIA_BENEFICIARIO { get; set; } = string.Empty;
+        public string Ciudad_Nacimiento_Beneficiario { get; set; } = string.Empty;
+        public string Ciudad_Residencia_Beneficiario { get; set; } = string.Empty;
+        public string area_geografica { get; set; } = string.Empty;
+        public string Pais_Nacimiento_Beneficiario { get; set; } = string.Empty;
+        public string desc_Sector { get; set; } = string.Empty;
     }
 }

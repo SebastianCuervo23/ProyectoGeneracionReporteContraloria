@@ -32,15 +32,17 @@ namespace ExportadorTxt.Application.Handlers
             try
             {
                 await _archivoService.InicializarArchivoAsync();
+               // await _archivoService.EscribirEncabezadoAsync();
 
                 int pageNumber = 1;
 
+                
                 while (true)
                 {
                     var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
                     if (!lote.Any()) break;
 
-                    await _archivoService.AgregarLoteAsync(lote);
+                    await _archivoService.AgregarLoteAsync(lote);                                    
 
                     var countLote = lote.Count();
                     totalRegistros += countLote;
@@ -53,7 +55,7 @@ namespace ExportadorTxt.Application.Handlers
                     pageNumber++;
                 }
 
-                var rutaCompleta = _archivoService.ObtenerRutaCompleta();  // ver nota (1)
+                var rutaCompleta = _archivoService.ObtenerRutaCompleta(); 
                 var tamano = File.Exists(rutaCompleta)
                                    ? new FileInfo(rutaCompleta).Length
                                    : 0L;

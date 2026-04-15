@@ -27,12 +27,15 @@ public class ArchivoService<T> : IArchivoService<T>
 
     public Task InicializarArchivoAsync()
     {
-        
         var nombre = $"{_nombreArchivo}_{DateTime.Now:yyyyMMddHHmm}.txt";
         _rutaCompleta = Path.Combine(_rutaSalida!, nombre);
 
-        // Crea el archivo vacío (o lo sobreescribe si existe)
-        File.WriteAllText(_rutaCompleta, string.Empty, Encoding.UTF8);
+        // Generar encabezado dinámico
+        var encabezado = string.Join("|", _propiedades.Select(p => p.Name));
+
+        // Crear archivo con encabezado
+        File.WriteAllText(_rutaCompleta, encabezado + Environment.NewLine, Encoding.UTF8);
+
         return Task.CompletedTask;
     }
 
