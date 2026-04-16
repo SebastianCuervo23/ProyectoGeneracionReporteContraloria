@@ -13,7 +13,9 @@ public class FondoLeyFoninez2Handler : IRequestHandler<GenerarFondoLeyFoninez2Co
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
 
-    public FondoLeyFoninez2Handler(IRepositorio<FondoLeyFoniñez2> repositorio, IArchivoService<FondoLeyFoniñez2> archivoService, IAuditService auditService)
+    public FondoLeyFoninez2Handler(IRepositorio<FondoLeyFoniñez2> repositorio, 
+        IArchivoService<FondoLeyFoniñez2> archivoService, 
+        IAuditService auditService)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;

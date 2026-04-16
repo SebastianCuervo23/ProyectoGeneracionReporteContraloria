@@ -12,7 +12,9 @@ public class FondoLeyFosfecHandler : IRequestHandler<GenerarFondoLeyFosfecComman
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
 
-    public FondoLeyFosfecHandler(IRepositorio<FondoLeyFosfec> repositorio, IArchivoService<FondoLeyFosfec> archivoService, IAuditService auditService)
+    public FondoLeyFosfecHandler(IRepositorio<FondoLeyFosfec> repositorio, 
+        IArchivoService<FondoLeyFosfec> archivoService, 
+        IAuditService auditService)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;

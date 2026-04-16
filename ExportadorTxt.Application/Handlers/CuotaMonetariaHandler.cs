@@ -12,7 +12,10 @@ public class CuotaMonetariaHandler : IRequestHandler<GenerarCuotaMonetariaComman
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
 
-    public CuotaMonetariaHandler(IRepositorio<CuotaMonetaria> repositorio, IArchivoService<CuotaMonetaria> archivoService, IAuditService auditService)
+    public CuotaMonetariaHandler(
+        IRepositorio<CuotaMonetaria> repositorio, 
+        IArchivoService<CuotaMonetaria> archivoService, 
+        IAuditService auditService)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;

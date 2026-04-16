@@ -8,8 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.13" />
    </ItemGroup>
 	<ItemGroup>
-			<ProjectReference Include="..\ExportadorTxt.Domain\ExportadorTxt.Domain.csproj" />
+			<ProjectReference Include="..\ExportadorTxt.Domain\ExportadorTxt.Domain.csproj" />	
 	</ItemGroup>
 </Project>

@@ -12,7 +12,10 @@ public class FondoLey115Handler : IRequestHandler<GenerarFondoLey115Command>
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
 
-    public FondoLey115Handler(IRepositorio<FondoLey115> repositorio, IArchivoService<FondoLey115> archivoService, IAuditService auditService)
+    public FondoLey115Handler(
+        IRepositorio<FondoLey115> repositorio, 
+        IArchivoService<FondoLey115> archivoService, 
+        IAuditService auditService)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;

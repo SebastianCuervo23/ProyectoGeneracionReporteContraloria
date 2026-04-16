@@ -33,7 +33,7 @@ public class ArchivoService<T> : IArchivoService<T>
         // Generar encabezado dinámico
         var encabezado = string.Join("|", _propiedades.Select(p => p.Name));
 
-        // Crear archivo con encabezado
+        // Crear archivo
         File.WriteAllText(_rutaCompleta, encabezado + Environment.NewLine, Encoding.UTF8);
 
         return Task.CompletedTask;

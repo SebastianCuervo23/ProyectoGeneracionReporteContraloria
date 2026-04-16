@@ -1,7 +1,9 @@
-﻿using ExportadorTxt.Application.Commands;
+﻿using ExportadorTxt.Aplication.Interfaces;
+using ExportadorTxt.Application.Commands;
 using ExportadorTxt.Application.Interfaces;
 using ExportadorTxt.Domain.Entidades;
 using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace ExportadorTxt.Application.Handlers;
 
@@ -11,12 +13,22 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
     private readonly IArchivoService<SubsidioEspecie> _archivoService;
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
+    private readonly IEmailService _emailService;
+    private readonly EmailSettings _emailSettings;
 
-    public SubsidioEspecieHandler(IRepositorio<SubsidioEspecie> repositorio, IArchivoService<SubsidioEspecie> archivoService, IAuditService auditService)
+    public SubsidioEspecieHandler(
+        IRepositorio<SubsidioEspecie> repositorio, 
+        IArchivoService<SubsidioEspecie> archivoService, 
+        IAuditService auditService, 
+        IEmailService emailService,
+        IOptions <EmailSettings> options)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;
         _auditService = auditService;
+        _emailService = emailService;       
+        _emailSettings = options.Value;
+    
     }
 
     public async Task Handle(GenerarSubsidioEspecieCommand request, CancellationToken cancellationToken)
@@ -69,6 +81,13 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
                 FechaInicio: fechaInicio,
                 FechaFin: DateTime.Now
             ));
+            await _emailService.EnviarEmail(_emailSettings.EmailReceptor,
+                 $"Reporte {tipoReporte} generado — periodo {request.AnioMes}",
+                 $"El reporte {tipoReporte} para el periodo {request.AnioMes} fue generado exitosamente.\n" +
+                 $"Registros: {totalRegistros} | Páginas: {totalPaginas} | Tamaño: {tamano / 1024} KB \n" +
+                 $"    ");
+
+        
         }
         catch (Exception ex)
         {

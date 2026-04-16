@@ -1,3 +1,5 @@
+using ExportadorTxt.Aplication.Interfaces;
+using ExportadorTxt.Application;
 using ExportadorTxt.Application.Handlers;
 using ExportadorTxt.Application.Interfaces;
 using ExportadorTxt.Domain.Entidades;
@@ -9,6 +11,9 @@ var builder = Host.CreateApplicationBuilder(args);
 // MediatR
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(AfiliadosHandler).Assembly));
+
+// Servicio de email
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 // Repositorios
 builder.Services.AddScoped<IRepositorio<Afiliados>, AfiliadosRepositorio>();
@@ -37,6 +42,8 @@ builder.Services.AddSingleton<IAuditService, AuditService>();
 
 // Worker
 builder.Services.AddHostedService<Worker>();
+builder.Services.Configure<EmailSettings>(
+builder.Configuration.GetSection("CONFIGURACIONES_EMAIL"));
 
 var host = builder.Build();
 host.Run();
