@@ -26,6 +26,11 @@ builder.Services.AddScoped<IRepositorio<FondoLeyFosfec>, FondoLeyFosfecRepositor
 builder.Services.AddScoped<IRepositorio<FondoLeyFovis>, FondoLeyFovisRepositorio>();
 builder.Services.AddScoped<IRepositorio<SubsidioEspecie>, SubsidioEspecieRepositorio>();
 
+//Acumulador
+builder.Services.AddScoped<ResultadoArchivos>();
+
+builder.Services.AddScoped<ProcesoGeneralService>();
+
 // Servicios de archivo
 builder.Services.AddScoped<IArchivoService<Afiliados>, ArchivoService<Afiliados>>();
 builder.Services.AddScoped<IArchivoService<Contratos>, ArchivoService<Contratos>>();
@@ -42,8 +47,7 @@ builder.Services.AddSingleton<IAuditService, AuditService>();
 
 // Worker
 builder.Services.AddHostedService<Worker>();
-builder.Services.Configure<EmailSettings>(
-builder.Configuration.GetSection("CONFIGURACIONES_EMAIL"));
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("CONFIGURACIONES_EMAIL"));
 
 var host = builder.Build();
 host.Run();

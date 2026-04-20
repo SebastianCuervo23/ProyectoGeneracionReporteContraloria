@@ -13,21 +13,20 @@ public class ContratosHandler : IRequestHandler<GenerarContratosCommand>
     private readonly IArchivoService<Contratos> _archivoService;
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
-    private readonly IEmailService _emailService;
-    private readonly EmailSettings _emailSettings;
+    private readonly ResultadoArchivos _resultadoArchivos;
+
 
     public ContratosHandler(
         IRepositorio<Contratos> repositorio,
         IArchivoService<Contratos> archivoService,
-        IAuditService auditService, 
-        IEmailService emailService, 
-        IOptions<EmailSettings> options)
+        IAuditService auditService,
+        ResultadoArchivos resultadoArchivos)
+      
     {
         _repositorio = repositorio;
         _archivoService = archivoService;
         _auditService = auditService;
-        _emailService = emailService;
-        _emailSettings = options.Value;
+       _resultadoArchivos = resultadoArchivos;
     }
 
     public async Task Handle(GenerarContratosCommand request, CancellationToken cancellationToken)
@@ -75,14 +74,8 @@ public class ContratosHandler : IRequestHandler<GenerarContratosCommand>
                 FechaInicio: fechaInicio,
                 FechaFin: DateTime.Now
                 ));
-
-
-            await _emailService.EnviarEmail(_emailSettings.EmailReceptor,
-    $"Reporte {tipoReporte} generado — periodo {request.AnioMes}",
-    $"El reporte {tipoReporte} para el periodo {request.AnioMes} fue generado exitosamente.\n" +
-    $"Registros: {totalRegistros} | Páginas: {totalPaginas} | Tamaño: {tamano / 1024} KB \n" +
-    $"    ");
-
+            var tamanoArchivoGB = (double)tamano / 1073741824;
+            _resultadoArchivos.Agregar("Contratos", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
         }
 
         catch (Exception ex) {

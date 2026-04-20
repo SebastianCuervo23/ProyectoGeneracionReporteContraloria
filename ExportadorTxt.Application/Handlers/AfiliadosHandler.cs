@@ -12,15 +12,18 @@ namespace ExportadorTxt.Application.Handlers
         private readonly IArchivoService<Afiliados> _archivoService;
         private const int PageSize = 50000;
         private readonly IAuditService _auditService;
+        private readonly ResultadoArchivos _resultadoArchivos;
 
         public AfiliadosHandler(
             IRepositorio<Afiliados> repositorio, 
             IArchivoService<Afiliados> archivoService,
-            IAuditService auditService)
+            IAuditService auditService,
+            ResultadoArchivos resultadoArchivos)
         {
             _repositorio = repositorio;
             _archivoService = archivoService;
             _auditService = auditService;
+            _resultadoArchivos = resultadoArchivos;
         }
         public async Task Handle(GenerarAfiliadosCommand request, CancellationToken cancellationToken)
         {
@@ -71,6 +74,8 @@ namespace ExportadorTxt.Application.Handlers
                     FechaInicio: fechaInicio,
                     FechaFin: DateTime.Now
                 ));
+                var tamanoArchivoGB = (double)tamano / 1073741824;
+                _resultadoArchivos.Agregar("Afiliados", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
             }
             catch (Exception ex){
                 await _auditService.RegistrarErrorAsync(new ErrorRecord(

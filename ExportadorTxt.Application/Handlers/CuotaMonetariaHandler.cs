@@ -11,15 +11,18 @@ public class CuotaMonetariaHandler : IRequestHandler<GenerarCuotaMonetariaComman
     private readonly IArchivoService<CuotaMonetaria> _archivoService;
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
+    private readonly ResultadoArchivos _resultadoArchivos;
 
     public CuotaMonetariaHandler(
         IRepositorio<CuotaMonetaria> repositorio, 
         IArchivoService<CuotaMonetaria> archivoService, 
-        IAuditService auditService)
+        IAuditService auditService,
+        ResultadoArchivos resultadoArchivos)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;
         _auditService = auditService;
+        _resultadoArchivos = resultadoArchivos;
     }
 
     public async Task Handle(GenerarCuotaMonetariaCommand request, CancellationToken cancellationToken)
@@ -66,7 +69,8 @@ public class CuotaMonetariaHandler : IRequestHandler<GenerarCuotaMonetariaComman
                 FechaInicio: fechaInicio,
                 FechaFin: DateTime.Now
                 ));
-
+            var tamanoArchivoGB = (double)tamano / 1073741824;
+            _resultadoArchivos.Agregar("Cuota Monetaria", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
         }
 
         catch (Exception ex) {

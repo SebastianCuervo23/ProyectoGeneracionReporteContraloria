@@ -11,15 +11,18 @@ public class FondoLey115Handler : IRequestHandler<GenerarFondoLey115Command>
     private readonly IArchivoService<FondoLey115> _archivoService;
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
+    private readonly ResultadoArchivos _resultadoArchivos;
 
     public FondoLey115Handler(
         IRepositorio<FondoLey115> repositorio, 
         IArchivoService<FondoLey115> archivoService, 
-        IAuditService auditService)
+        IAuditService auditService,
+        ResultadoArchivos resultadoArchivos)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;
         _auditService = auditService;
+        _resultadoArchivos = resultadoArchivos;
     }
 
     public async Task Handle(GenerarFondoLey115Command request, CancellationToken cancellationToken)
@@ -65,6 +68,8 @@ public class FondoLey115Handler : IRequestHandler<GenerarFondoLey115Command>
                 FechaInicio: fechaInicio,
                 FechaFin: DateTime.Now
                 ));
+            var tamanoArchivoGB = (double)tamano / 1073741824;
+            _resultadoArchivos.Agregar("Fondos de ley 115", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
         }
         catch (Exception ex) {
             await _auditService.RegistrarErrorAsync(new ErrorRecord(

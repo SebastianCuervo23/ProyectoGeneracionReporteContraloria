@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "eeDxJUz1qtM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\brayan.cuervol\\source\\repos\\ProyectoGeneracionReporteContraloria\\ExportadorTxt.Application\\ExportadorTxt.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\brayan.cuervol\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\brayan.cuervol\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\brayan.cuervol\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.13\\microsoft.extensions.dependencyinjection.abstractions.9.0.13.nupkg.sha512",
+    "C:\\Users\\brayan.cuervol\\.nuget\\packages\\microsoft.extensions.options\\9.0.13\\microsoft.extensions.options.9.0.13.nupkg.sha512",
+    "C:\\Users\\brayan.cuervol\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.13\\microsoft.extensions.primitives.9.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

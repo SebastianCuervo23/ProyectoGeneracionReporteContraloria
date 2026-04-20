@@ -1,0 +1,16 @@
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\bin\Debug\net9.0\ExportadorTxt.Application.deps.json
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\bin\Debug\net9.0\ExportadorTxt.Application.dll
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\bin\Debug\net9.0\ExportadorTxt.Application.pdb
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\bin\Debug\net9.0\ExportadorTxt.Domain.dll
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\bin\Debug\net9.0\ExportadorTxt.Domain.pdb
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.csproj.AssemblyReference.cache
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.AssemblyInfoInputs.cache
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.AssemblyInfo.cs
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.csproj.CoreCompileInputs.cache
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.sourcelink.json
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\Exportad.A2BAD4FD.Up2Date
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.dll
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\refint\ExportadorTxt.Application.dll
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ExportadorTxt.Application.pdb
+C:\Users\brayan.cuervol\source\repos\ProyectoGeneracionReporteContraloria\ExportadorTxt.Application\obj\Debug\net9.0\ref\ExportadorTxt.Application.dll

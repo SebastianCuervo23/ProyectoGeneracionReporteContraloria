@@ -11,14 +11,17 @@ public class FondoLeyFoninezeHandler : IRequestHandler<GenerarFondoLeyFoninezeCo
     private readonly IArchivoService<FondoLeyFoniñez> _archivoService;
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
+    private readonly ResultadoArchivos _resultadoArchivos;
 
     public FondoLeyFoninezeHandler(IRepositorio<FondoLeyFoniñez> repositorio, 
         IArchivoService<FondoLeyFoniñez> archivoService, 
-        IAuditService auditService)
+        IAuditService auditService,
+        ResultadoArchivos resultadoArchivos)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;
         _auditService = auditService;
+        _resultadoArchivos = resultadoArchivos;
     }
 
     public async Task Handle(GenerarFondoLeyFoninezeCommand request, CancellationToken cancellationToken)
@@ -65,6 +68,8 @@ public class FondoLeyFoninezeHandler : IRequestHandler<GenerarFondoLeyFoninezeCo
                 FechaInicio: fechaInicio,
                 FechaFin: DateTime.Now
             ));
+            var tamanoArchivoGB = (double)tamano / 1073741824;
+            _resultadoArchivos.Agregar("Fondos de ley Foninez", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
         }
         catch (Exception ex) {
 

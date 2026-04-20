@@ -13,22 +13,21 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
     private readonly IArchivoService<SubsidioEspecie> _archivoService;
     private const int PageSize = 100000;
     private readonly IAuditService _auditService;
-    private readonly IEmailService _emailService;
-    private readonly EmailSettings _emailSettings;
+    private readonly ResultadoArchivos _resultadoArchivos;
 
     public SubsidioEspecieHandler(
         IRepositorio<SubsidioEspecie> repositorio, 
         IArchivoService<SubsidioEspecie> archivoService, 
         IAuditService auditService, 
         IEmailService emailService,
-        IOptions <EmailSettings> options)
+        IOptions <EmailSettings> options,
+        ResultadoArchivos resultadoArchivos)
     {
         _repositorio = repositorio;
         _archivoService = archivoService;
         _auditService = auditService;
-        _emailService = emailService;       
-        _emailSettings = options.Value;
-    
+        _resultadoArchivos = resultadoArchivos;
+
     }
 
     public async Task Handle(GenerarSubsidioEspecieCommand request, CancellationToken cancellationToken)
@@ -66,9 +65,7 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
 
             var rutaCompleta = _archivoService.ObtenerRutaCompleta();
 
-            var tamano = File.Exists(rutaCompleta)
-                ? new FileInfo(rutaCompleta).Length
-                : 0L;
+            var tamano = File.Exists(rutaCompleta)? new FileInfo(rutaCompleta).Length: 0L;
 
             await _auditService.RegistrarArchivoAsync(new AuditRecord(
                 NombreArchivo: Path.GetFileName(rutaCompleta),
@@ -81,12 +78,10 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
                 FechaInicio: fechaInicio,
                 FechaFin: DateTime.Now
             ));
-            await _emailService.EnviarEmail(_emailSettings.EmailReceptor,
-                 $"Reporte {tipoReporte} generado — periodo {request.AnioMes}",
-                 $"El reporte {tipoReporte} para el periodo {request.AnioMes} fue generado exitosamente.\n" +
-                 $"Registros: {totalRegistros} | Páginas: {totalPaginas} | Tamaño: {tamano / 1024} KB \n" +
-                 $"    ");
 
+            var tamanoArchivoGB = (double)tamano / 1073741824;
+            _resultadoArchivos.Agregar("Subsidio en Especie",totalRegistros.ToString(),tamanoArchivoGB.ToString("F3"));
+         
         
         }
         catch (Exception ex)

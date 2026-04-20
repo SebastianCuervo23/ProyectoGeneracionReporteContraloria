@@ -13,40 +13,42 @@ public class Worker : BackgroundService
         _serviceProvider = serviceProvider;
         _config = config;
     }
-
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var intervalo = _config.GetValue<int>("IntervaloMinutos");
+        var horaEjecucion = _config.GetValue<int>("HoraEjecucion");
+        var diaEjecucion = _config.GetValue<int>("DiaEjecucion");
+
+        DateTime? ultimaEjecucion = null;
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            try
+            var ahora = DateTime.Now;
+
+            var esDiaCorrecto = ahora.Day == diaEjecucion;
+
+            var esHoraCorrecta =ahora.Hour == horaEjecucion;
+
+            var Ejecucion = ultimaEjecucion?.Hour == ahora.Hour;
+
+            if (esDiaCorrecto && esHoraCorrecta && !Ejecucion)
             {
-                Console.WriteLine($"[{DateTime.Now}] Iniciando proceso...");
+                try
+                {
+                    using var scope = _serviceProvider.CreateScope();
 
-                using var scope = _serviceProvider.CreateScope();
-                var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+                    var proceso = scope.ServiceProvider.GetRequiredService<ProcesoGeneralService>();
 
-                var anioMes = int.Parse(DateTime.Now.ToString("yyyyMM"));
+                    await proceso.Ejecutar(stoppingToken);
 
-                await mediator.Send(new GenerarAfiliadosCommand(anioMes), stoppingToken);
-                await mediator.Send(new GenerarContratosCommand(anioMes), stoppingToken);
-                await mediator.Send(new GenerarCuotaMonetariaCommand(anioMes), stoppingToken);
-                await mediator.Send(new GenerarFondoLey115Command(anioMes), stoppingToken);
-                await mediator.Send(new GenerarFondoLeyFoninezeCommand(anioMes), stoppingToken);
-                await mediator.Send(new GenerarFondoLeyFoninez2Command(anioMes), stoppingToken);
-                await mediator.Send(new GenerarFondoLeyFosfecCommand(anioMes), stoppingToken);
-                await mediator.Send(new GenerarFondoLeyFovisCommand(anioMes), stoppingToken);
-                await mediator.Send(new GenerarSubsidioEspecieCommand(anioMes), stoppingToken);
-
-                Console.WriteLine($"[{DateTime.Now}] Todos los archivos generados correctamente.");
+                    ultimaEjecucion = ahora;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[{DateTime.Now}] Error: {ex.Message}");
-            }
-
-            await Task.Delay(TimeSpan.FromMinutes(intervalo), stoppingToken);
+                  
+            await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
         }
     }
 }
