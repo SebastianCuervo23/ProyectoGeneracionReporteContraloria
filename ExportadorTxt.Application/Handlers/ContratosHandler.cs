@@ -29,7 +29,10 @@ public class ContratosHandler : IRequestHandler<GenerarContratosCommand>
        _resultadoArchivos = resultadoArchivos;
     }
 
-    public async Task Handle(GenerarContratosCommand request, CancellationToken cancellationToken)
+    public async Task Handle(
+        GenerarContratosCommand request, 
+        CancellationToken cancellationToken
+        )
     {
         var tipoReporte = typeof(Contratos).Name;
         var fechaInicio = DateTime.Now;
@@ -38,30 +41,37 @@ public class ContratosHandler : IRequestHandler<GenerarContratosCommand>
 
         try
         {
-
-            await _archivoService.InicializarArchivoAsync();
-
+            bool archivoInicializado = false;
             int pageNumber = 1;
 
             while (true)
             {
                 var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
-                if (!lote.Any()) break;
+
+                if (!lote.Any())
+                    break;
+
+                if (!archivoInicializado)
+                {
+                    await _archivoService.InicializarArchivoAsync();
+                    archivoInicializado = true;
+                }
 
                 await _archivoService.AgregarLoteAsync(lote);
 
-                var countLote=lote.Count();
-                totalRegistros +=countLote;
-                totalPaginas =pageNumber;
+                var countLote = lote.Count();
+                totalRegistros += countLote;
+                totalPaginas = pageNumber;
 
-                Console.WriteLine($"[{tipoReporte}] Página {pageNumber} procesada ({countLote} registros)");
+                Console.WriteLine($"[{typeof(Contratos).Name}] Página {pageNumber} procesada ({countLote} registros)");
 
-                if (lote.Count() < PageSize) break;
+                if (countLote < PageSize)
+                    break;
 
                 pageNumber++;
             }
             var rutaCompleta = _archivoService.ObtenerRutaCompleta();
-            var tamano = File.Exists(rutaCompleta)? new FileInfo(rutaCompleta).Length : 0L;
+            var tamano = File.Exists(rutaCompleta) ? new FileInfo(rutaCompleta).Length : 0L;
 
             await _auditService.RegistrarArchivoAsync(new AuditRecord(
                 NombreArchivo: Path.GetFileName(rutaCompleta),
@@ -74,11 +84,16 @@ public class ContratosHandler : IRequestHandler<GenerarContratosCommand>
                 FechaInicio: fechaInicio,
                 FechaFin: DateTime.Now
                 ));
+
             var tamanoArchivoGB = (double)tamano / 1073741824;
-            _resultadoArchivos.Agregar("Contratos", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
+            if (totalRegistros > 0)
+            {
+                _resultadoArchivos.Agregar("Contratos", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
+            }
         }
 
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             await _auditService.RegistrarErrorAsync(new ErrorRecord(
                         TipoReporte: tipoReporte,
                         AnioMes: request.AnioMes,

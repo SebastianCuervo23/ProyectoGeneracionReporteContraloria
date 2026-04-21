@@ -27,7 +27,10 @@ public class FondoLeyFovisHandler : IRequestHandler<GenerarFondoLeyFovisCommand>
         _resultadoArchivos = resultadoArchivos;
     }
 
-    public async Task Handle(GenerarFondoLeyFovisCommand request, CancellationToken cancellationToken)
+    public async Task Handle(
+        GenerarFondoLeyFovisCommand request, 
+        CancellationToken cancellationToken
+        )
     {
         var tipoReporte = typeof(FondoLeyFovis).Name;
         var fechaInicio = DateTime.Now;
@@ -35,27 +38,37 @@ public class FondoLeyFovisHandler : IRequestHandler<GenerarFondoLeyFovisCommand>
         int totalPaginas = 0;
         try
         {
-            await _archivoService.InicializarArchivoAsync();
-
+            bool archivoInicializado = false;
             int pageNumber = 1;
 
             while (true)
             {
                 var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
-                if (!lote.Any()) break;
+
+                if (!lote.Any())
+                    break;
+
+                if (!archivoInicializado)
+                {
+                    await _archivoService.InicializarArchivoAsync();
+                    archivoInicializado = true;
+                }
 
                 await _archivoService.AgregarLoteAsync(lote);
+
                 var countLote = lote.Count();
                 totalRegistros += countLote;
                 totalPaginas = pageNumber;
-                Console.WriteLine($"[{typeof(FondoLeyFovis).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
 
-                if (lote.Count() < PageSize) break;
+                Console.WriteLine($"[{typeof(FondoLeyFovis).Name}] Página {pageNumber} procesada ({countLote} registros)");
+
+                if (countLote < PageSize)
+                    break;
 
                 pageNumber++;
             }
-            var rutaCompleta = _archivoService.ObtenerRutaCompleta();  // ver nota (1)
-            var tamano = File.Exists(rutaCompleta)? new FileInfo(rutaCompleta).Length: 0L;
+            var rutaCompleta = _archivoService.ObtenerRutaCompleta();
+            var tamano = File.Exists(rutaCompleta) ? new FileInfo(rutaCompleta).Length : 0L;
 
             await _auditService.RegistrarArchivoAsync(new AuditRecord(
                 NombreArchivo: Path.GetFileName(rutaCompleta),
@@ -70,9 +83,13 @@ public class FondoLeyFovisHandler : IRequestHandler<GenerarFondoLeyFovisCommand>
             ));
 
             var tamanoArchivoGB = (double)tamano / 1073741824;
-            _resultadoArchivos.Agregar("Fondos de ley fovis", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
+            if (totalRegistros > 0)
+            {
+                _resultadoArchivos.Agregar("Fondos de ley fovis", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
+            }
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             await _auditService.RegistrarErrorAsync(new ErrorRecord(
                        TipoReporte: tipoReporte,
                        AnioMes: request.AnioMes,

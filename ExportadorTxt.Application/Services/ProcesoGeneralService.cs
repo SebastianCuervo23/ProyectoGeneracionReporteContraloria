@@ -30,8 +30,9 @@ public class ProcesoGeneralService
         {
             Console.WriteLine($"[{DateTime.Now}] Iniciando proceso...");
 
-            var anioMes = int.Parse(DateTime.Now.ToString("yyyyMM"));
-            
+            //var anioMes = int.Parse(DateTime.Now.AddMonths(-1).ToString("yyyyMM"));
+            var anioMes = 202602; 
+
             await _mediator.Send(new GenerarAfiliadosCommand(anioMes), stoppingToken);
             await _mediator.Send(new GenerarContratosCommand(anioMes), stoppingToken);
             await _mediator.Send(new GenerarCuotaMonetariaCommand(anioMes), stoppingToken);
@@ -45,16 +46,22 @@ public class ProcesoGeneralService
             var archivos = _resultadoArchivos.ObtenerTodos();
 
             var cuerpo = new StringBuilder();
-            cuerpo.AppendLine($"Cordial saludo \n Me permito informar que se han generado los siguientes archivos exitosamente:\n ");
+            if (archivos.Count == 0)
+            {
+                cuerpo.AppendLine($"No se generaron archivos para el periodo {anioMes}. Favor validar.");
+            }
+            else
+            {
+                cuerpo.AppendLine($"Cordial saludo \n \n Me permito informar que se han generado exitosamente los siguientes archivos :\n ");
+            }
 
             foreach (var archivo in archivos)
             {
                 cuerpo.AppendLine($"\n- {archivo}");
                 
-            }
-
-            await _emailService.EnviarEmail(_emailSettings.EmailReceptor,$"GENERACION ARCHIVOS CONTRALORIA. {DateTime.Now}",cuerpo.ToString());
-            Console.WriteLine($"Todos los archivos generados correctamente.[{DateTime.Now}] ");
+            }          
+            await _emailService.EnviarEmail(_emailSettings.EmailReceptor,$"GENERACION ARCHIVOS CONTRALORIA. {anioMes}",cuerpo.ToString());
+            Console.WriteLine($"Proceso finalizado exitosamente.[{DateTime.Now}] ");
         }
         catch (Exception ex)
         {

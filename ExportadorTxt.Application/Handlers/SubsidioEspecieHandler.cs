@@ -18,9 +18,7 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
     public SubsidioEspecieHandler(
         IRepositorio<SubsidioEspecie> repositorio, 
         IArchivoService<SubsidioEspecie> archivoService, 
-        IAuditService auditService, 
-        IEmailService emailService,
-        IOptions <EmailSettings> options,
+        IAuditService auditService,         
         ResultadoArchivos resultadoArchivos)
     {
         _repositorio = repositorio;
@@ -30,7 +28,10 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
 
     }
 
-    public async Task Handle(GenerarSubsidioEspecieCommand request, CancellationToken cancellationToken)
+    public async Task Handle(
+        GenerarSubsidioEspecieCommand request, 
+        CancellationToken cancellationToken
+        )
     {
         var tipoReporte = typeof(SubsidioEspecie).Name; 
         var fechaInicio = DateTime.Now;
@@ -39,15 +40,21 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
 
         try
         {
-            await _archivoService.InicializarArchivoAsync();
-
+            bool archivoInicializado = false;
             int pageNumber = 1;
 
             while (true)
             {
                 var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
 
-                if (!lote.Any()) break;
+                if (!lote.Any())
+                    break;
+                
+                if (!archivoInicializado)
+                {
+                    await _archivoService.InicializarArchivoAsync();
+                    archivoInicializado = true;
+                }
 
                 await _archivoService.AgregarLoteAsync(lote);
 
@@ -55,7 +62,7 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
                 totalRegistros += countLote;
                 totalPaginas = pageNumber;
 
-                Console.WriteLine($"[{typeof(SubsidioEspecie).Name}] Página {pageNumber} procesada ({lote.Count()} registros)");
+                Console.WriteLine($"[{typeof(SubsidioEspecie).Name}] Página {pageNumber} procesada ({countLote} registros)");
 
                 if (countLote < PageSize)
                     break;
@@ -80,8 +87,10 @@ public class SubsidioEspecieHandler : IRequestHandler<GenerarSubsidioEspecieComm
             ));
 
             var tamanoArchivoGB = (double)tamano / 1073741824;
-            _resultadoArchivos.Agregar("Subsidio en Especie",totalRegistros.ToString(),tamanoArchivoGB.ToString("F3"));
-         
+            if (totalRegistros > 0)
+            {
+                _resultadoArchivos.Agregar("Subsidio en Especie", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
+            }
         
         }
         catch (Exception ex)

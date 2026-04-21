@@ -25,7 +25,10 @@ namespace ExportadorTxt.Application.Handlers
             _auditService = auditService;
             _resultadoArchivos = resultadoArchivos;
         }
-        public async Task Handle(GenerarAfiliadosCommand request, CancellationToken cancellationToken)
+        public async Task Handle(
+            GenerarAfiliadosCommand request, 
+            CancellationToken cancellationToken
+            )
         {
             var tipoReporte = typeof(Afiliados).Name;
             var fechaInicio = DateTime.Now;
@@ -34,34 +37,38 @@ namespace ExportadorTxt.Application.Handlers
 
             try
             {
-                await _archivoService.InicializarArchivoAsync();
-               // await _archivoService.EscribirEncabezadoAsync();
-
+                bool archivoInicializado = false;
                 int pageNumber = 1;
 
-                
                 while (true)
                 {
                     var lote = await _repositorio.ObtenerDatosAsync(request.AnioMes, pageNumber, PageSize);
-                    if (!lote.Any()) break;
 
-                    await _archivoService.AgregarLoteAsync(lote);                                    
+                    if (!lote.Any())
+                        break;
+
+                    if (!archivoInicializado)
+                    {
+                        await _archivoService.InicializarArchivoAsync();
+                        archivoInicializado = true;
+                    }
+
+                    await _archivoService.AgregarLoteAsync(lote);
 
                     var countLote = lote.Count();
                     totalRegistros += countLote;
                     totalPaginas = pageNumber;
 
-                    Console.WriteLine($"[{tipoReporte}] Página {pageNumber} procesada ({countLote} registros)");
+                    Console.WriteLine($"[{typeof(Afiliados).Name}] Página {pageNumber} procesada ({countLote} registros)");
 
-                    if (countLote < PageSize) break;
+                    if (countLote < PageSize)
+                        break;
 
                     pageNumber++;
                 }
 
                 var rutaCompleta = _archivoService.ObtenerRutaCompleta(); 
-                var tamano = File.Exists(rutaCompleta)
-                                   ? new FileInfo(rutaCompleta).Length
-                                   : 0L;
+                var tamano = File.Exists(rutaCompleta)? new FileInfo(rutaCompleta).Length: 0L;
 
                 await _auditService.RegistrarArchivoAsync(new AuditRecord(
                     NombreArchivo: Path.GetFileName(rutaCompleta),
@@ -75,7 +82,10 @@ namespace ExportadorTxt.Application.Handlers
                     FechaFin: DateTime.Now
                 ));
                 var tamanoArchivoGB = (double)tamano / 1073741824;
-                _resultadoArchivos.Agregar("Afiliados", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
+                if (totalRegistros > 0)
+                {
+                    _resultadoArchivos.Agregar("Afiliados", totalRegistros.ToString(), tamanoArchivoGB.ToString("F3"));
+                }
             }
             catch (Exception ex){
                 await _auditService.RegistrarErrorAsync(new ErrorRecord(
