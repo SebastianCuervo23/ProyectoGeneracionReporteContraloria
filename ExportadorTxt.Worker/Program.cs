@@ -3,7 +3,8 @@ using ExportadorTxt.Application;
 using ExportadorTxt.Application.Handlers;
 using ExportadorTxt.Application.Interfaces;
 using ExportadorTxt.Domain.Entidades;
-using ExportadorTxt.Infrastructure.Infraestructura;
+using ExportadorTxt.Infrastructure.Infraestructura.Repositorios;
+using ExportadorTxt.Infrastructure.Infraestructura.Servicios;
 using ExportadorTxt.Worker;
 
 var builder = Host.CreateApplicationBuilder(args);

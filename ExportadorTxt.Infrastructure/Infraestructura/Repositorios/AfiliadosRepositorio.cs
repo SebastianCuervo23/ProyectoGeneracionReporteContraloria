@@ -5,22 +5,22 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 
-namespace ExportadorTxt.Infrastructure.Infraestructura;
+namespace ExportadorTxt.Infrastructure.Infraestructura.Repositorios;
 
-public class FondoLeyFovisRepositorio : IRepositorio<FondoLeyFovis>
+public class AfiliadosRepositorio : IRepositorio<Afiliados>
 {
     private readonly string? _connectionString;
 
-    public FondoLeyFovisRepositorio(IConfiguration configuration)
+    public AfiliadosRepositorio(IConfiguration configuration)
     {
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<IEnumerable<FondoLeyFovis>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
+    public async Task<IEnumerable<Afiliados>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
     {
         using var connection = new SqlConnection(_connectionString);
-        return await connection.QueryAsync<FondoLeyFovis>(
-            "SPR_OBTENER_FONDO_LEY_FOVIS",
+        return await connection.QueryAsync<Afiliados>(
+            "SPR_OBTENER_AFILIADOS",
             new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
             commandType: CommandType.StoredProcedure,
             commandTimeout: 300);

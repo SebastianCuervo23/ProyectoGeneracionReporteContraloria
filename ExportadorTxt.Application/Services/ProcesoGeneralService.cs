@@ -31,7 +31,7 @@ public class ProcesoGeneralService
             Console.WriteLine($"[{DateTime.Now}] Iniciando proceso...");
 
             //var anioMes = int.Parse(DateTime.Now.AddMonths(-1).ToString("yyyyMM"));
-            var anioMes = 202602; 
+            var anioMes = 202506; 
 
             await _mediator.Send(new GenerarAfiliadosCommand(anioMes), stoppingToken);
             await _mediator.Send(new GenerarContratosCommand(anioMes), stoppingToken);

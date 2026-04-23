@@ -5,7 +5,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 
-namespace ExportadorTxt.Infrastructure.Infraestructura;
+namespace ExportadorTxt.Infrastructure.Infraestructura.Repositorios;
 
 public class FondoLeyFosfecRepositorio : IRepositorio<FondoLeyFosfec>
 {

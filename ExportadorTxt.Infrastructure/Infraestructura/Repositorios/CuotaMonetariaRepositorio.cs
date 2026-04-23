@@ -5,22 +5,22 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 
-namespace ExportadorTxt.Infrastructure.Infraestructura;
+namespace ExportadorTxt.Infrastructure.Infraestructura.Repositorios;
 
-public class AfiliadosRepositorio : IRepositorio<Afiliados>
+public class CuotaMonetariaRepositorio : IRepositorio<CuotaMonetaria>
 {
     private readonly string? _connectionString;
 
-    public AfiliadosRepositorio(IConfiguration configuration)
+    public CuotaMonetariaRepositorio(IConfiguration configuration)
     {
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<IEnumerable<Afiliados>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
+    public async Task<IEnumerable<CuotaMonetaria>> ObtenerDatosAsync(int anioMes, int pageNumber, int pageSize)
     {
         using var connection = new SqlConnection(_connectionString);
-        return await connection.QueryAsync<Afiliados>(
-            "SPR_OBTENER_AFILIADOS",
+        return await connection.QueryAsync<CuotaMonetaria>(
+            "SPR_OBTENER_CUOTA_MONETARIA",
             new { ANIOMES = anioMes, PageNumber = pageNumber, PageSize = pageSize },
             commandType: CommandType.StoredProcedure,
             commandTimeout: 300);

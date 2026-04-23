@@ -3,7 +3,7 @@ using ExportadorTxt.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 
-namespace ExportadorTxt.Infrastructure.Infraestructura;
+namespace ExportadorTxt.Infrastructure.Infraestructura.Servicios;
 
 public class EmailService : IEmailService
 {

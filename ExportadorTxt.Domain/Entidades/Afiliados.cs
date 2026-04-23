@@ -28,4 +28,5 @@
     public string DESC_TIPO_AFILIADO { get; set; } = string.Empty;
     public string DESC_CATEGORIA { get; set; } = string.Empty;
     public string B_ES_BENEFICIARIO_SUBSIDIO_DINERO { get; set; } = string.Empty;
+   
 }

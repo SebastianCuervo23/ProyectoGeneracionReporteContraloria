@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using System.Text;
 
-namespace ExportadorTxt.Infrastructure.Infraestructura;
+namespace ExportadorTxt.Infrastructure.Infraestructura.Servicios;
 
 public class ArchivoService<T> : IArchivoService<T>
 {
@@ -27,7 +27,7 @@ public class ArchivoService<T> : IArchivoService<T>
 
     public Task InicializarArchivoAsync()
     {
-        var nombre = $"{_nombreArchivo}_{DateTime.Now:yyyyMMddHHmm}.txt";
+        var nombre = $"{_nombreArchivo}_{DateTime.Now:yyyyMMddHHmm}.csv";
         _rutaCompleta = Path.Combine(_rutaSalida!, nombre);
 
         // Generar encabezado dinámico
